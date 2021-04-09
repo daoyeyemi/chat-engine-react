@@ -5,15 +5,15 @@ import "firebase/firestore";
 
 try {
     firebase.initializeApp({
-        apiKey: process.env.REACT_APP_API_KEY,
-        authDomain: process.env.REACT_APP_AUTH_DOMAIN, 
-        projectId: process.env.REACT_APP_PROJECT_ID, 
-        storageBucket: process.env.REACT_APP_STORAGE_BUCKET, 
-        messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID, 
-        appId: process.env.REACT_APP_APP_ID 
+        apiKey: "AIzaSyBtytpZSqmRXKh7TvSA9GEKbDaK4hRNQCU",
+        authDomain: "chat-react-app-b84e1.firebaseapp.com", 
+        projectId: "chat-react-app-b84e1", 
+        storageBucket: "chat-react-app-b84e1.appspot.com", 
+        messagingSenderId: "513552426295", 
+        appId: "1:513552426295:web:aac5bacab508c8e4a626b2" 
     });
 } catch (error) {
-    if (!/already exist/u.test(error.message)) {
+    if (!/already exists/u.test(error.message)) {
         console.error("Firebase admin initialization error", error.stack)
     }
 }
@@ -22,4 +22,4 @@ export const fb = {
     auth: firebase.auth(),
     storage: firebase.storage(),
     firestore: firebase.firestore()
-}
+};
