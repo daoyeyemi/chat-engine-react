@@ -1,0 +1,15 @@
+.form {
+    background-color: grey;
+    border-radius: 30%;
+    margin: auto;
+    margin-top: 100px;
+    height: 500px;
+    width: 70%;
+    text-align: center;
+}
+
+/* .application {
+    background-color: grey;
+    height: 500px;
+    border-radius: 10%;
+} */
