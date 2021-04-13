@@ -7,7 +7,7 @@ import "../../App.css";
 
 function App() {
     return (
-        <div className="application">
+        <div className="app">
             <Switch>
                 <Route exact path="/" component={Chat} />
                 <Route path="/login" component={Login} />

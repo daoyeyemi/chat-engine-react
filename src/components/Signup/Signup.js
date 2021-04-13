@@ -1,33 +1,68 @@
 import React from 'react';
 import "../../App.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import validate from "./config";
-import defaultVals from "./config";
+import * as Yup from "yup";
+import { Link } from "react-router-dom";
 
 function Signup() {
+
+const defaultValues = {
+    email: "",
+    password: "",
+    userName: "",
+    verifyPassword: ""
+};
+
+const validationSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email address").required("Required"),
+    password: Yup.string().required("Required").min(6, "must be at least six characters"),
+    userName: Yup.string().required("Required").matches(/^\S*$/, "Spaces not allowed").min(5, "must be at least six characters"),
+    verifyPassword: Yup.string().required("Required").oneOf([Yup.ref("password"), null], "Passwords do not match")
+});
+
     return (
-        <div className="form">
+        <div className="auth-form">
             <h1>Sign up</h1>
             <Formik
-                onSubmit={() => {console.log("Submitting...")} }
+                onSubmit={() => { console.log("Submitting...") } }
                 validateOnMount={true}
-                initialValues={defaultVals}
-                validate={validate}
+                initialValues={defaultValues}
+                validationSchema={validationSchema}
             >
-                <Form>
-                    <Field type="email" name="email"/>
-                    <ErrorMessage name="email" component="div"/>
-                    <Field type="username" name="username"/>
-                    <ErrorMessage name="password" component="div"/>
-                    <Field type="password" name="password"/>
-                    <ErrorMessage name="password" component="div"/>
-                    <Field type="verifyPassword" name="verifyPassword"/>
-                    <ErrorMessage name="verifyPassword" component="div"/>
-                    <button type="submit">Sign up</button>
-                </Form>    
+                {({ isValid, isSubmitting }) => (
+                   <Form>
+                        <label>
+                            Username
+                            <Field className="form-control" type="text" name="userName"/>
+                            <ErrorMessage className="error" name="userName" component="div"/>
+                        </label>
+                        <label>
+                            Email
+                            <Field className="form-control" type="email" name="email"/>
+                            <ErrorMessage className="error" name="email" component="div"/>
+                        </label>
+                        <label>
+                            Password
+                            <Field className="form-control" type="password" name="password"/>
+                            <ErrorMessage className="error" name="password" component="div"/>
+                        </label>                    
+                        <label>
+                            Re-type password
+                            <Field className="form-control" type="verifyPassword" name="verifyPassword"/>
+                            <ErrorMessage className="error" name="verifyPassword" component="div"/>
+                        </label>
+                        <Link to="/login">
+                        <div className="auth-link-container auth-link">
+                            Have an account already?
+                        </div>
+                        </Link>
+                        
+                        <button disabled={isSubmitting === true || isValid === false} type="submit">Sign up</button>
+                    </Form> 
+                )}
             </ Formik>
         </div>
     )
-}
+};
 
-export default Signup
+export default Signup;
