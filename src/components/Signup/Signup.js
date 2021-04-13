@@ -3,6 +3,7 @@ import "../../App.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function Signup() {
 
@@ -19,6 +20,8 @@ const validationSchema = Yup.object().shape({
     userName: Yup.string().required("Required").matches(/^\S*$/, "Spaces not allowed").min(5, "must be at least six characters"),
     verifyPassword: Yup.string().required("Required").oneOf([Yup.ref("password"), null], "Passwords do not match")
 });
+
+const [errorInServer, setErrorInServer] = useState("");
 
     return (
         <div className="auth-form">
@@ -61,6 +64,8 @@ const validationSchema = Yup.object().shape({
                     </Form> 
                 )}
             </ Formik>
+
+        {errorInServer && <div className="error">{errorInServer}</div>}
         </div>
     )
 };
