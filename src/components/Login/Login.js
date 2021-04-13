@@ -38,7 +38,8 @@ function Login() {
             } else {
                 setErrorInServer("Something isn't quite right.")
             }
-        });
+        })
+        .finally(() => setSubmitting(false));
     };
 
     return (
@@ -68,7 +69,9 @@ function Login() {
                     </div>
                     </Link>
                     
-                    <button disabled={isSubmitting === true || isValid === false} type="submit">Log in</button>
+                    <button 
+                        disabled={isSubmitting === true || isValid === false} 
+                        type="submit">Log in</button>
  
                 </Form>
                 )}
@@ -76,7 +79,6 @@ function Login() {
 
             {errorInServer && <div className="error">{errorInServer}</div>}
         </div>
-                
     )
 }
 
