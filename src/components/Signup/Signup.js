@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../../App.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 function Signup() {
-
+    
 const defaultValues = {
     email: "",
     password: "",
@@ -21,13 +20,17 @@ const validationSchema = Yup.object().shape({
     verifyPassword: Yup.string().required("Required").oneOf([Yup.ref("password"), null], "Passwords do not match")
 });
 
+const signingUp = ({email, userName, password, setSubmitting}) => {
+    console.log("Signing Up: ", email, userName, password);
+}
+
 const [errorInServer, setErrorInServer] = useState("");
 
     return (
         <div className="auth-form">
             <h1>Sign up</h1>
             <Formik
-                onSubmit={() => { console.log("Submitting...") } }
+                onSubmit={signingUp}
                 validateOnMount={true}
                 initialValues={defaultValues}
                 validationSchema={validationSchema}
@@ -51,7 +54,7 @@ const [errorInServer, setErrorInServer] = useState("");
                         </label>                    
                         <label>
                             Re-type password
-                            <Field className="form-control" type="verifyPassword" name="verifyPassword"/>
+                            <Field className="form-control" type="password" name="verifyPassword"/>
                             <ErrorMessage className="error" name="verifyPassword" component="div"/>
                         </label>
                         <Link to="/login">
