@@ -3,6 +3,7 @@ import "../../App.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import { fb } from '../../service/firebase';
 
 function Login() {
     
@@ -16,11 +17,29 @@ function Login() {
         password: Yup.string().required("Required")
     });
 
-    const loggingIn = ({email, password, setSubmitting}) => {
-        console.log("Logging In: ", email, password);
-    }
-
     const [errorInServer, setErrorInServer] = useState("");
+
+    const loggingIn = ({ email, password }, { setSubmitting }) => {
+        fb.auth
+        .signInWithEmailAndPassword(email, password)
+        .then(res => {
+            if (!res.user) {
+                setErrorInServer(
+                    "They're have been some problems logging you in. Try again."
+                )
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            if (error.code === "auth/wrong-password") {
+                setErrorInServer("This email and password do not match.");
+            } else if (error.code === "auth/user-not-found") {
+                setErrorInServer("No account is associated with this email.")
+            } else {
+                setErrorInServer("Something isn't quite right.")
+            }
+        });
+    };
 
     return (
         <div className="auth-form">

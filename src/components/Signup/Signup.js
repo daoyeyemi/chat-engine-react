@@ -68,7 +68,7 @@ const [errorInServer, setErrorInServer] = useState("");
                 )}
             </ Formik>
 
-        {errorInServer && <div className="error">{errorInServer}</div>}
+        {!!errorInServer && <div className="error">{errorInServer}</div>}
         </div>
     )
 };
