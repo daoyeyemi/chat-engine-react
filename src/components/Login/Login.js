@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "../../App.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -19,6 +19,8 @@ function Login() {
     const loggingIn = ({email, password, setSubmitting}) => {
         console.log("Logging In: ", email, password);
     }
+
+    const [errorInServer, setErrorInServer] = useState("");
 
     return (
         <div className="auth-form">
@@ -47,14 +49,16 @@ function Login() {
                     </div>
                     </Link>
                     
-                    <button disabled={isSubmitting === true || isValid === false} type="submit">Sign up</button>
+                    <button disabled={isSubmitting === true || isValid === false} type="submit">Log in</button>
  
                 </Form>
                 )}
             </Formik>
+
+            {errorInServer && <div className="error">{errorInServer}</div>}
         </div>
                 
     )
 }
 
-export default Login
+export default Login;
