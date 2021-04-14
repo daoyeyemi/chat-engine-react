@@ -1,3 +1,4 @@
+import { fb } from "../../service/firebase";
 import useAuth from "../../hooks/useAuth";
 import React, { useEffect } from 'react'
 import { Route, Switch } from "react-router-dom";

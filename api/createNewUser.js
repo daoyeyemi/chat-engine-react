@@ -1,6 +1,4 @@
-import axios from axios;
-
-import React from 'react'
+import axios from "axios";
 
 const createNewUser = async (req, res) => {
     const userId = req.body.userId;
@@ -11,7 +9,7 @@ const createNewUser = async (req, res) => {
             { headers: { "Private-Key": process.env.private_key }}
         ).then(apiRes => {
             res.json({
-                body: apiRes.body,
+                body: apiRes.data,
                 error: null
             })
         }).catch(() => {

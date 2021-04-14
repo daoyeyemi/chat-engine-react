@@ -13,7 +13,7 @@ const useAuth = () => {
             }
         });
 
-        return unsubscribe
+        return unsubscribe;
     }, []);
 
     return {

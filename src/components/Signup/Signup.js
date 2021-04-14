@@ -3,6 +3,7 @@ import "../../App.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import { fb } from '../../service/firebase';
 
 function Signup() {
     
@@ -20,8 +21,39 @@ const validationSchema = Yup.object().shape({
     verifyPassword: Yup.string().required("Required").oneOf([Yup.ref("password"), null], "Passwords do not match")
 });
 
-const signingUp = ({email, userName, password, setSubmitting}) => {
-    console.log("Signing Up: ", email, userName, password);
+const signingUp = ({ email, userName, password }, { setSubmitting }) => {
+    fb.auth
+        .createUserWithEmailAndPassword(email, password)
+        .then(res => {
+            console.log(res);
+            if (res?.user?.uid) {
+                fetch("/api/createNewUser", {
+                    method : "POST",
+                    headers : {
+                        "Content-Type" : "application/json"
+                    },
+                    body: JSON.stringify({
+                        userName,
+                        userId: res.user.uid
+                    })
+                }).then(() => {
+                    fb.firestore
+                        .collection("chatUsers")
+                        .doc(res.user.uid)
+                        .set({ userName, avatar: "" })
+                })
+            } else {
+                setErrorInServer("We're experiencing problems signing you up at the moment.")
+            }
+        })
+        .catch(error => {
+            if (error.code === "auth/email-already-in-use") {
+                setErrorInServer("An account with this email already exists.")
+            } else {
+                setErrorInServer("There have been some problems signing you up. Try again.")
+            }
+        })
+        .finally(() => setSubmitting(false));
 }
 
 const [errorInServer, setErrorInServer] = useState("");
