@@ -29,13 +29,13 @@ const signingUp = ({ email, userName, password }, { setSubmitting }) => {
             if (res?.user?.uid) {
                 fetch("/api/createNewUser", {
                     method : "POST",
+                    headers : {
+                        "Content-Type" : "application/json"
+                    },
                     body: JSON.stringify({
                         userName,
                         userId: res.user.uid
-                    }),
-                    headers : {
-                        "Content-Type" : "application/json"
-                    }
+                    })
                 }).then(() => {
                     fb.firestore
                         .collection("chatUsers")
