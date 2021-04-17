@@ -8,6 +8,7 @@ import "../../App.css";
 import useResolved from "../../hooks/useResolved";
 import { useHistory } from "react-router-dom";
 import { ChatProvider } from "../../context/ChatContext";
+import { LoadingOutlined } from "@ant-design/icons";
 
 function App() {
 
@@ -32,7 +33,8 @@ function App() {
                     </Switch>
                 </div>
             </ChatProvider>
-            : <>Loading...</>
+            : (<LoadingOutlined />)
+
     )
 }
 
