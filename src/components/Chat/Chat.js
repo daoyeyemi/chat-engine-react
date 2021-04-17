@@ -1,9 +1,16 @@
-import React from 'react'
+import { useEffect } from "react";
+import { useChat } from "../../context/ChatContext";
 
 function Chat() {
+    const ChatStuff = useChat();
+    
+    useEffect(() => {
+        console.log(ChatStuff);
+    }, [ChatStuff])
+    
     return (
         <>
-            Chat
+        Chat
         </>
     )
 }

@@ -7,13 +7,14 @@ import Signup from "../Signup/Signup";
 import "../../App.css";
 import useResolved from "../../hooks/useResolved";
 import { useHistory } from "react-router-dom";
+import { ChatProvider } from "../../context/ChatContext";
 
 function App() {
 
     const history = useHistory();
     const authUser = useAuth().authUser;
     const authResolved = useResolved(authUser);
-
+    
     useEffect(() => {
         if (authResolved) {
             history.push(authUser ? "/" : "/login")
@@ -21,13 +22,17 @@ function App() {
     }, [authResolved, authUser, history]);
 
     return (
-        <div className="app">
-            <Switch>
-                <Route exact path="/" component={Chat} />
-                <Route path="/login" component={Login} />
-                <Route path="/signup" component={Signup} />
-            </Switch>
-        </div>
+        authResolved ?
+            <ChatProvider authUser={authUser}>
+                <div className="app">
+                    <Switch>
+                        <Route exact path="/" component={Chat} />
+                        <Route path="/login" component={Login} />
+                        <Route path="/signup" component={Signup} />
+                    </Switch>
+                </div>
+            </ChatProvider>
+            : <>Loading...</>
     )
 }
 

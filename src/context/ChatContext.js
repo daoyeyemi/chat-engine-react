@@ -1,6 +1,6 @@
-import { fb } from "service";
+import { fb } from "../service/firebase";
 import { createContext, useContext, useEffect, useState } from "react";
-import { newChat, leaveChat, deleteChat, getMessages } from "chat-engine-io";
+import { newChat, leaveChat, deleteChat, getMessages } from "react-chat-engine";
 
 const ChatContext = createContext();
 
@@ -8,20 +8,20 @@ const ChatContext = createContext();
 // callback function that goes through array in brackets that will activate useEffect
 // function if authUser changes
 
-export const ChatProvider = ( children, authUser ) => {
+export const ChatProvider = ( { children, authUser } ) => {
     const [myChats, setMyChats] = useState();
     const [chatConfig, setChatConfig] = useState();
     const [selectedChat, setSelectedChat] = useState();
 
     const createChatFunc = () => {
-        newChat(chatConfig, { title: "" })
+        newChat(chatConfig, { title: "" }, console.log(chatConfig))
     };
 
     const deleteChatFunc = (chat) => {
         const isAdmin = chat.admin === chatConfig.userName;
 
         if (isAdmin && window.confirm("Are you sure you want to delete this chat?")) {
-            deleteChat(chatConfig, chat.id);
+            deleteChat(chatConfig, chat.id, console.log(...chat));
         } else if (window.confirm("Are you sure you want to leave this chat?")) {
             leaveChat(chatConfig, chat.id, chatConfig.userName);
         }
@@ -58,8 +58,8 @@ export const ChatProvider = ( children, authUser ) => {
             myChats,
             setMyChats,
             chatConfig,
-            selectedChat,
             setChatConfig,
+            selectedChat,
             setSelectedChat,
             selectChatFunc,
             deleteChatFunc,
