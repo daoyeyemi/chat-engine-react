@@ -1,33 +1,96 @@
 import { fb } from "service";
-import { createContext } from "react";
-import { newChat } from "chat-engine-io";
+import { createContext, useContext, useEffect, useState } from "react";
+import { newChat, leaveChat, deleteChat, getMessages } from "chat-engine-io";
 
 const ChatContext = createContext();
 
-const ChatProvider = ({ children, authUser }) => {
+
+// callback function that goes through array in brackets that will activate useEffect
+// function if authUser changes
+
+export const ChatProvider = ( children, authUser ) => {
     const [myChats, setMyChats] = useState();
     const [chatConfig, setChatConfig] = useState();
     const [selectedChat, setSelectedChat] = useState();
 
-    const createChat = () => {
+    const createChatFunc = () => {
         newChat(chatConfig, { title: "" })
     };
 
-    const deleteChat = (chat) => {
-        const userAdmin = chat.admin === chatConfig.userName;
+    const deleteChatFunc = (chat) => {
+        const isAdmin = chat.admin === chatConfig.userName;
 
         if (isAdmin && window.confirm("Are you sure you want to delete this chat?")) {
-            deleteChat(chatConfig, chat.id)
+            deleteChat(chatConfig, chat.id);
+        } else if (window.confirm("Are you sure you want to leave this chat?")) {
+            leaveChat(chatConfig, chat.id, chatConfig.userName);
         }
     }
+
+    const selectChatFunc = (chat) => {
+        getMessages(chatConfig, chat.id, messages => {
+            setSelectedChat({
+                ...chat,
+                messages
+            });
+        });
+    };
+
+    useEffect(() => {
+        if (authUser) {
+            fb.firestore
+                .collection("chatUsers")
+                .doc(authUser.uid)
+                .onSnapshot(shot => {
+                    setChatConfig({
+                        userSecret: authUser.uid,
+                        avatar: shot.data().avatar,
+                        userName: shot.data().userName,
+                        projectID: "7c426087-b6c7-4934-a67c-80cdf624709e"
+                    })
+                })
+        }
+    }, [authUser]);
 
     return (
        <ChatContext.Provider 
         value={{
-
+            myChats,
+            setMyChats,
+            chatConfig,
+            selectedChat,
+            setChatConfig,
+            setSelectedChat,
+            selectChatFunc,
+            deleteChatFunc,
+            createChatFunc
         }}
        >
            {children}
        </ChatContext.Provider>
-    )
+    );
+};
+
+export const useChat = () => {
+    const myChats = useContext(ChatContext).myChats;
+    const setMyChats = useContext(ChatContext).setMyChats;
+    const chatConfig = useContext(ChatContext).chatConfig;
+    const selectedChat = useContext(ChatContext).selectedChat;
+    const setChatConfig = useContext(ChatContext).setChatConfig;
+    const setSelectedChat = useContext(ChatContext).setSelectedChat;
+    const selectChatFunc = useContext(ChatContext).selectChatFunc;
+    const deleteChatFunc = useContext(ChatContext).deleteChatFunc;
+    const createChatFunc = useContext(ChatContext).createChatFunc;
+
+    return {
+        myChats,
+        setMyChats,
+        chatConfig,
+        selectedChat,
+        setChatConfig,
+        setSelectedChat,
+        selectChatFunc,
+        deleteChatFunc,
+        createChatFunc 
+    }
 }
