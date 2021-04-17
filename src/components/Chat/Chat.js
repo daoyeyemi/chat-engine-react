@@ -18,7 +18,7 @@ export const Chat = () => {
         <>
         {!!chatConfig && 
             (<ChatEngine 
-                hideUI={true}
+                // hideUI={true}
                 userName={chatConfig.userName}
                 projectID={chatConfig.projectID}
                 userSecret={chatConfig.userSecret}

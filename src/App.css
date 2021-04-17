@@ -414,3 +414,8 @@ label, h1 {
     right: 5px;
     cursor: pointer;
   }
+  .ce-chat-feed, .ce-chats-container, .ce-settings {
+    display: none;
+    z-index: -100;
+    visibility: hidden;
+  }
