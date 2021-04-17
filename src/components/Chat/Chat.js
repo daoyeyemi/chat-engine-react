@@ -1,18 +1,34 @@
 import { useEffect } from "react";
 import { useChat } from "../../context/ChatContext";
+import { getChats, ChatEngine } from "react-chat-engine";
 
-function Chat() {
-    const ChatStuff = useChat();
+export const Chat = () => {
     
+    const {
+       myChats, setMyChats, chatConfig, selectedChat,  
+    } = useChat();
+    
+    // const myChat = useChat();
+
     useEffect(() => {
-        console.log(ChatStuff);
-    }, [ChatStuff])
-    
+        console.log("My Chats: ", myChats);
+    }, [myChats])
+
     return (
         <>
-        Chat
+        {!!chatConfig && 
+            (<ChatEngine 
+                hideUI={true}
+                userName={chatConfig.userName}
+                projectID={chatConfig.projectID}
+                userSecret={chatConfig.userSecret}
+                onConnect={() => {
+                    getChats(chatConfig, setMyChats);
+                }}
+            />)
+        }
         </>
     )
 }
 
-export default Chat
+export default Chat;

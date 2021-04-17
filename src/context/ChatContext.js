@@ -14,14 +14,14 @@ export const ChatProvider = ( { children, authUser } ) => {
     const [selectedChat, setSelectedChat] = useState();
 
     const createChatFunc = () => {
-        newChat(chatConfig, { title: "" }, console.log(chatConfig))
+        newChat(chatConfig, { title: "" })
     };
 
     const deleteChatFunc = (chat) => {
         const isAdmin = chat.admin === chatConfig.userName;
 
         if (isAdmin && window.confirm("Are you sure you want to delete this chat?")) {
-            deleteChat(chatConfig, chat.id, console.log(...chat));
+            deleteChat(chatConfig, chat.id);
         } else if (window.confirm("Are you sure you want to leave this chat?")) {
             leaveChat(chatConfig, chat.id, chatConfig.userName);
         }
@@ -71,6 +71,8 @@ export const ChatProvider = ( { children, authUser } ) => {
     );
 };
 
+// can only use this function and its contents with the children of 
+// the chat context provider 
 export const useChat = () => {
     const myChats = useContext(ChatContext).myChats;
     const setMyChats = useContext(ChatContext).setMyChats;
