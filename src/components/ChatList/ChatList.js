@@ -2,6 +2,8 @@ import { useChat } from "../../context/ChatContext"
 import { Icon } from "semantic-ui-react";
 import { notUser } from "../../helpers/notUser";
 import { joinUsers } from "../../helpers/joinUsers";
+import { ChatAvatar } from "../ChatAvatar/ChatAvatar";
+
 export const ChatList = () => {
     // return (
     //    <></> 
@@ -30,7 +32,7 @@ export const ChatList = () => {
                         </>
                     ) : chat.people.length === 2 ? (
                         <>
-                            <>Avatar</>
+                            <ChatAvatar username={notUser(chatConfig, chat)} chat={chat} />
                             <div className="chat-list-preview">
                                 <div className="preview-username">
                                     {notUser(chatConfig, chat)}
