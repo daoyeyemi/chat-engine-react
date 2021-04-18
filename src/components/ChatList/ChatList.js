@@ -32,7 +32,7 @@ export const ChatList = () => {
                             <>Avatar</>
                             <div className="chat-list-preview">
                                 <div className="preview-username">
-                                    Other User Name
+                                    Input username here
                                 <div className="preview-message">
                                     {chat.last_message.attachments.length ? 
                                     `${chat.last_message.sender.username} sent an attachment`
@@ -45,7 +45,7 @@ export const ChatList = () => {
                         <>
                             <Icon circular inverted color="brown" name="users" />
                             <div className="preview-username">
-                                lots of people
+                                Group of usernames
                             </div>
                             <div className="preview-message">
                             {chat.last_message.attachments.length ? 
