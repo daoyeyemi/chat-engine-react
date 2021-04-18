@@ -34,12 +34,26 @@ export const ChatList = () => {
                                 <div className="preview-username">
                                     Other User Name
                                 <div className="preview-message">
-                                    {chat.last_message.attachments.length ? `${chat.last_message.sender.username} sent an attachment`}
+                                    {chat.last_message.attachments.length ? 
+                                    `${chat.last_message.sender.username} sent an attachment`
+                                    : (chat.last_message.text.slice(0, 50) + "...")}
                                 </div>
                                 </div>
                             </div>
                         </>
-                    ) }
+                    ) : (
+                        <>
+                            <Icon circular inverted color="brown" name="users" />
+                            <div className="preview-username">
+                                lots of people
+                            </div>
+                            <div className="preview-message">
+                            {chat.last_message.attachments.length ? 
+                                    `${chat.last_message.sender.username} sent an attachment`
+                                    : (chat.last_message.text.slice(0, 50) + "...")}
+                            </div>
+                        </>
+                    )}
                     </div>
                 </div>
             ) )}

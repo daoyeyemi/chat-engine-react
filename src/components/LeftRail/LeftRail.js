@@ -1,6 +1,7 @@
 import { useChat } from "../../context/ChatContext";
 import useResolved from "../../hooks/useResolved";
 import { LoadingOutlined } from "@ant-design/icons";
+import { ChatList } from "../ChatList/ChatList";
 
 export const LeftRail = () => {
     const { myChats, createChatFunc } = useChat();
@@ -12,7 +13,7 @@ export const LeftRail = () => {
                 <>
                     {myChats.length ? (
                         <div className="chat-list-container">
-
+                            <ChatList />
                         </div>
                     ) : (
                         <div className="chat-list-container no-chats-yet">
