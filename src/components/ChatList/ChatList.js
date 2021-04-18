@@ -1,6 +1,7 @@
 import { useChat } from "../../context/ChatContext"
 import { Icon } from "semantic-ui-react";
-
+import { notUser } from "../../helpers/notUser";
+import { joinUsers } from "../../helpers/joinUsers";
 export const ChatList = () => {
     // return (
     //    <></> 
@@ -32,12 +33,12 @@ export const ChatList = () => {
                             <>Avatar</>
                             <div className="chat-list-preview">
                                 <div className="preview-username">
-                                    Input username here
+                                    {notUser(chatConfig, chat)}
+                                </div>
                                 <div className="preview-message">
                                     {chat.last_message.attachments.length ? 
                                     `${chat.last_message.sender.username} sent an attachment`
                                     : (chat.last_message.text.slice(0, 50) + "...")}
-                                </div>
                                 </div>
                             </div>
                         </>
@@ -45,7 +46,7 @@ export const ChatList = () => {
                         <>
                             <Icon circular inverted color="brown" name="users" />
                             <div className="preview-username">
-                                Group of usernames
+                                {joinUsers(chat.people, chatConfig.userName).slice(0, 50) + "..."}
                             </div>
                             <div className="preview-message">
                             {chat.last_message.attachments.length ? 
