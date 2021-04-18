@@ -1,5 +1,6 @@
 import useAuth from "../../hooks/useAuth";
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
+import 'semantic-ui-css/semantic.min.css';
 import { Route, Switch } from "react-router-dom";
 import Login from "../Login/Login";
 import Chat from "../Chat/Chat";
