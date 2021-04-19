@@ -18,10 +18,10 @@ export const ChatProvider = ( { children, authUser } ) => {
     };
 
     const deleteChatFunc = (chat) => {
-        const isAdmin = chat.admin === chatConfig.userName;
+        const isAdmin = chat.admin.username === chatConfig.userName;
 
         if (isAdmin && window.confirm("Are you sure you want to delete this chat?")) {
-            deleteChat(chatConfig, chat.id);
+            deleteChat(chatConfig, chat.id, console.log(myChats));
         } else if (window.confirm("Are you sure you want to leave this chat?")) {
             leaveChat(chatConfig, chat.id, chatConfig.userName);
         }
@@ -64,8 +64,7 @@ export const ChatProvider = ( { children, authUser } ) => {
             selectChatFunc,
             deleteChatFunc,
             createChatFunc
-        }}
-       >
+        }}>
            {children}
        </ChatContext.Provider>
     );

@@ -5,9 +5,7 @@ import { joinUsers } from "../../helpers/joinUsers";
 import { ChatAvatar } from "../ChatAvatar/ChatAvatar";
 
 export const ChatList = () => {
-    // return (
-    //    <></> 
-    // )
+ 
     const {
         myChats,
         chatConfig,
@@ -57,6 +55,9 @@ export const ChatList = () => {
                             </div>
                         </>
                     )}
+                    </div>
+                    <div onClick={() => deleteChatFunc(chat)} className="chat-item-delete">
+                        <Icon name="delete" />
                     </div>
                 </div>
             ) )}
