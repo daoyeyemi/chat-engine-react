@@ -25,4 +25,15 @@ export const SearchUsers = ({visible, closeFn}) => {
         selectedChat,
         setSelectedChat
     } = useChat();
+
+    const selectUser = (username) => {
+        const filteredChats = chats.map(chat => chat.id !== selectedChat.id);
+        const updatedChat = {
+            ...selectedChat,
+            people: [...selectedChat.people, { person: {username}}]
+        }
+        setSelectedChat(updatedChat);
+        setMyChats([...filteredChats, updatedChat]);
+        closeFn();
+    }
 }
