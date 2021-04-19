@@ -9,9 +9,9 @@ export const SearchUsers = ({visible, closeFn}) => {
     const [searchTerm, setSearchTerm] = useState("");
 
     const [searchResults, setSearchResults] = useState(null);
-// when search bar becomes visible, ideally we want 
-// cursor to be inside search bar so it's more convenient 
-// for user 
+    // when search bar becomes visible, ideally we want 
+    // cursor to be inside search bar so it's more convenient 
+    // for user 
     useEffect(() => {
         if (visible && searchRef) {
             searchRef.focus();
@@ -36,4 +36,27 @@ export const SearchUsers = ({visible, closeFn}) => {
         setMyChats([...filteredChats, updatedChat]);
         closeFn();
     }
+
+    useEffect(() => {
+        if (searchTerm) {
+            setLoading(true)
+            getOtherPeople(chatConfig, selectedChat.id, (chatId, data) => {
+                const userNames = Object.keys(data).map(key => data[key].username)
+                    .filter(u => u.toLowerCase().includes(searchTerm.toLowercase()))
+                
+                setSearchResults(userNames.map(u => ({ title: u })));
+                setLoading(false)
+            })
+        } else {
+            setSearchResults(null);
+        }
+        
+    }, [chatConfig, selectedChat, searchTerm]);
+
+    return (
+        <div classname="user-search"
+                style={{ display: visible ? "block" : "none" }}>
+            <Search />
+        </div>
+    )
 }
