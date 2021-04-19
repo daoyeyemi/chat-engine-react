@@ -3,6 +3,7 @@ import { useChat } from "../../context/ChatContext";
 import { getChats, ChatEngine } from "react-chat-engine";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { LeftRail } from "../LeftRail/LeftRail";
+import { ChatToolbar } from "../ChatToolbar/ChatToolbar";
 export const Chat = () => {
     
     const {
@@ -29,7 +30,7 @@ export const Chat = () => {
  
         <div className="chat-container">
         <div className="current-chat">
-            { selectedChat ? (<></>) : (
+            { selectedChat ? (<ChatToolbar />) : (
             <div className="no-chat-selected">
                 <ArrowLeftOutlined />
                 Choose a Chat
