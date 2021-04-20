@@ -30,10 +30,13 @@ export const SearchUsers = ({visible, closeFn}) => {
         addPerson(chatConfig, selectedChat.id, username, () => {
             console.log(selectUser)
             const filteredChats = myChats.filter(chat => chat.id !== selectedChat.id);
+            const mappedChats = myChats.map(chat => chat.id !== selectedChat.id);
             const updatedChat = {
                 ...selectedChat,
                 people: [...selectedChat.people, { person: {username}}]
             }
+            console.log(mappedChats);
+            console.log(filteredChats);
             setSelectedChat(updatedChat);
             setMyChats([...filteredChats, updatedChat]);
             closeFn();
