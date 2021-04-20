@@ -16,29 +16,29 @@ export const ChatList = () => {
 
     return (
         <div className="chat-list">
-            {myChats.map((chat, index) => (
-                <div className={`chat-list-item ${selectedChat?.id === chat.id 
+            {myChats.map((c, index) => (
+                <div className={`chat-list-item ${selectedChat?.id === c.id 
                     ? "selected-chat-item" : ""}`} key={index}
                     >
-                    <div className="chat-list-item-content" onClick={() => selectChatFunc(chat)}>
-                    {chat.people.length === 1 ? (
+                    <div className="chat-list-item-content" onClick={() => selectChatFunc(c)}>
+                    {c.people.length === 1 ? (
                         <> 
                             <Icon circular inverted color="violet" name="user cancel" />
                             <div className="chat-list-preview">
                                 <div className="preview-username">No one yet added</div>
                             </div>
                         </>
-                    ) : chat.people.length === 2 ? (
+                    ) : c.people.length === 2 ? (
                         <>
-                            <ChatAvatar username={notUser(chatConfig, chat)} chat={chat} />
+                            <ChatAvatar username={notUser(chatConfig, c)} chat={c} />
                             <div className="chat-list-preview">
                                 <div className="preview-username">
-                                    {notUser(chatConfig, chat)}
+                                    {notUser(chatConfig, c)}
                                 </div>
                                 <div className="preview-message">
-                                    {chat.last_message.attachments.length ? 
-                                    `${chat.last_message.sender.username} sent an attachment`
-                                    : (chat.last_message.text.slice(0, 50) + "...")}
+                                    {c.last_message.attachments.length ? 
+                                    `${c.last_message.sender.username} sent an attachment`
+                                    : (c.last_message.text.slice(0, 50) + "...")}
                                 </div>
                             </div>
                         </>
@@ -46,17 +46,17 @@ export const ChatList = () => {
                         <>
                             <Icon circular inverted color="brown" name="users" />
                             <div className="preview-username">
-                                {joinUsers(chat.people, chatConfig.userName).slice(0, 50) + "..."}
+                                {joinUsers(c.people, chatConfig.userName).slice(0, 50) + "..."}
                             </div>
                             <div className="preview-message">
-                            {chat.last_message.attachments.length ? 
-                                    `${chat.last_message.sender.username} sent an attachment`
-                                    : (chat.last_message.text.slice(0, 50) + "...")}
+                            {c.last_message.attachments.length ? 
+                                    `${c.last_message.sender.username} sent an attachment`
+                                    : (c.last_message.text.slice(0, 50) + "...")}
                             </div>
                         </>
                     )}
                     </div>
-                    <div onClick={() => deleteChatFunc(chat)} className="chat-item-delete">
+                    <div onClick={() => deleteChatFunc(c)} className="chat-item-delete">
                         <Icon name="delete" />
                     </div>
                 </div>

@@ -2,6 +2,7 @@ import { useChat } from "../../context/ChatContext";
 import { useState } from "react";
 import { joinUsers } from "../../helpers/joinUsers";
 import { Icon } from "semantic-ui-react";
+import { SearchUsers } from "../SearchUsers/SearchUsers";
 
 export const ChatToolbar = () => {
     const { selectedChat, chatConfig } = useChat();
@@ -10,7 +11,7 @@ export const ChatToolbar = () => {
         <>
             <div className="chat-toolbar">
                 <div className="chat-header-text">
-                    {joinUsers(selectedChat.people, chatConfig.userName).slice(0, 100 )}
+                    {joinUsers(selectedChat.people, chatConfig.userName).slice(0, 100)}
                 </div>
                 <div className="add-user-icon">
                     <Icon 
@@ -20,7 +21,7 @@ export const ChatToolbar = () => {
                     />
                 </div>
             </div>
-            
+        <SearchUsers visible={searching} closeFn={() => setSearching(false)} />
         </>
     )
 }

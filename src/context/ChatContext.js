@@ -33,6 +33,7 @@ export const ChatProvider = ( { children, authUser } ) => {
                 ...chat,
                 messages
             });
+            console.log(chat);
         });
     };
 

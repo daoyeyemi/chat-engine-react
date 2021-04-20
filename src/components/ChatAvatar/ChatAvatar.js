@@ -21,9 +21,9 @@ export const ChatAvatar = ({chat, username, className}) => {
 
     return (
         avatar ? (
-        <Image className={className || "chat-list-avatar"} src={avatar} />
+        <Image className={"chat-list-avatar"} src={avatar} />
         ) : (
-            <div className={className || "empty-avatar"}>
+            <div className={"empty-avatar"}>
                 {/* userName is different from username for a reason */}
                 {chat.people.find(people => people.person.username !== chatConfig.userName)
                 .person.username[0]}

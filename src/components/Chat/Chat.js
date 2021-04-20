@@ -4,6 +4,7 @@ import { getChats, ChatEngine } from "react-chat-engine";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { LeftRail } from "../LeftRail/LeftRail";
 import { ChatToolbar } from "../ChatToolbar/ChatToolbar";
+
 export const Chat = () => {
     
     const {
@@ -19,6 +20,7 @@ export const Chat = () => {
         <LeftRail />
         {!!chatConfig && 
             (<ChatEngine 
+                hideUI={true}
                 userName={chatConfig.userName}
                 projectID={chatConfig.projectID}
                 userSecret={chatConfig.userSecret}
@@ -29,14 +31,14 @@ export const Chat = () => {
         }
  
         <div className="chat-container">
-        <div className="current-chat">
-            { selectedChat ? (<ChatToolbar />) : (
-            <div className="no-chat-selected">
-                <ArrowLeftOutlined />
-                Choose a Chat
+            <div className="current-chat">
+                { selectedChat ? (<ChatToolbar />) : (
+                <div className="no-chat-selected">
+                    <ArrowLeftOutlined style={{ paddingRight : "15px"}}/>
+                    Choose a Chat
+                </div>
+                ) }
             </div>
-            ) }
-        </div>
         </div>
         </>
 

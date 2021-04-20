@@ -238,7 +238,8 @@ label, h1 {
   }
   .chat-toolbar {
     display: flex;
-    min-height: 50px;
+    height: 50px;
+    width: 100%;
     color: #f2f2f2;
     padding-left: 25px;
     padding-right: 25px;
