@@ -1,4 +1,12 @@
 export const ChatInput = () => {
+    const chatConfig = useChat().chatConfig;
+    const selectedChat = useChat().selectedChat;
+    const [chatInputText, setChatInputText] = useState("");
+    const [imageModalOpen, setImageModalOpen] = useState(false);
+
+    const inputRef = useRef(null);
+    const [image, setImage] = useState();
+
     return (
         <>
         <div className= "chat-controls">

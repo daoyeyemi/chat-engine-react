@@ -32,7 +32,8 @@ export const RailHeader = () => {
                 className="current-user-info"
                 name="sign-out"
             />
-            <div className="current-user-info">
+            {resolvedConfig && chatConfig ? (
+                <div className="current-user-info">
                 <IconGroup 
                     className="user-avatar"
                     size="large"
@@ -42,13 +43,24 @@ export const RailHeader = () => {
                             input.value = "";
                             input.click();
                         }
-                    }}
-                />
+                    }}>
+                        {chatConfig.avatar ? (
+                            <Image src={chatConfig.avatar} />   
+                        ) : (
+                            <div className="empty-avatar">
+                                {chatConfig.username[0].toLowerCase()}
+                            </div>
+                        )}
+                    <Icon corner="bottom right" name="camera" inverted circular /> 
+                </IconGroup>
+                <div className="current-username">{chatConfig.userName}</div>
             </div>
+            ) : (
+                <div className="user-loading">
+                    <Loading />
+                </div>
+            )}
         </div>
-        </>
-         
-
-         
+        </> 
     )
 }
