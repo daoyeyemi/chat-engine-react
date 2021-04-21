@@ -50,7 +50,7 @@ export const ChatInput = () => {
                 }}
                 onChange={event => setChatInputText(event.target.value)}
             />
-            <div onClick={sendChatMessage} className="send-message-icon">
+            <div onClick={sendChatMess} className="send-message-icon">
                 <Icon name="send" color="grey" />
             </div>
                 
@@ -62,7 +62,7 @@ export const ChatInput = () => {
                 onChange={event => {
                     const doc = event.target?.files?.[0];
                     if (doc) {
-                        onFileAttach(file);
+                        onFileAttach(doc);
                     }
                 }}
             />

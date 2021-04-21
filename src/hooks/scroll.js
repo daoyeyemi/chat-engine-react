@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export const scroll = (trigger, className) => {
+export const Scroll = (trigger, className) => {
     useEffect(() => {
         if (trigger) {
             Promise.all(

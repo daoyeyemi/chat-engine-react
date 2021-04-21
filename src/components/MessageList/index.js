@@ -1,12 +1,12 @@
 import { useChat } from "../../context/ChatContext";
 import { ChatAvatar } from "../../components/ChatAvatar/ChatAvatar";
-import { GroupMessages } from "../../helpers/groupMessages";
-import { scroll } from "../../hooks/scroll";
+import { groupMessages } from "../../helpers/groupMessages";
+import { Scroll } from "../../hooks/scroll";
 
 export const MessageList = () => {
 
     const { selectedChat } = useChat();
-    scroll(selectedChat, "chat-messages")
+    Scroll(selectedChat, "chat-messages")
 
     return (
         <div className="chat-messages">
@@ -15,7 +15,6 @@ export const MessageList = () => {
                 <div key={index} className="chat-message">
                 <div className="chat-message-header">
                     <ChatAvatar />
-
                     <div classname="message-author">{m[0].sender.username}</div>
                 </div>
 
@@ -25,11 +24,13 @@ export const MessageList = () => {
                             <div className="message-text">{individualMessage.text}</div>
                             {individualMessage.attachments.length && (
                                 <img
+                                    className="message-image"
+                                    src={individualMessage.attachments[0].file}
+                                    alt={individualMessage.id + '-attachment'}
+                                />
                             )}
                         </div>
                     ))}
-                    
-                    
                 </div>
             </div>
                 ))

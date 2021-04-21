@@ -4,10 +4,10 @@ export const groupMessages = (messages) => {
     let currentArray = [];
     let currentAuthor = "";
 
-    messages.map(m => {
+    messages.forEach(m => {
         if (m.sender.username !== currentAuthor) {
             if (currentAuthor) {
-                finalArray.push([...currentArr])
+                finalArray.push([...currentArray])
             }
             currentArray.splice(0, currentArray.length);
             currentArray.push(m);

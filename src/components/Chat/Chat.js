@@ -4,6 +4,8 @@ import { getChats, ChatEngine } from "react-chat-engine";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { LeftRail } from "../LeftRail/LeftRail";
 import { ChatToolbar } from "../ChatToolbar/ChatToolbar";
+import { MessageList } from "../MessageList/index";
+import { ChatInput } from "../ChatInput/index";
 
 export const Chat = () => {
     
@@ -17,7 +19,7 @@ export const Chat = () => {
 
     return (
         <>
-        <LeftRail />
+        
         {!!chatConfig && 
             (<ChatEngine 
                 hideUI={true}
@@ -31,8 +33,15 @@ export const Chat = () => {
         }
  
         <div className="chat-container">
+            <LeftRail />
             <div className="current-chat">
-                { selectedChat ? (<ChatToolbar />) : (
+                { selectedChat ? (
+                <div className="chat">
+                    <ChatToolbar />
+                    <MessageList />
+                    <ChatInput />
+                </div>
+                ) : (
                 <div className="no-chat-selected">
                     <ArrowLeftOutlined style={{ paddingRight : "15px"}}/>
                     Choose a Chat
