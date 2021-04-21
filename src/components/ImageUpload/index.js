@@ -1,4 +1,5 @@
 import { Modal } from "semantic-ui-react";
+import AvatarEditor from "react-avatar-editor";
 
 export const ImageUpload = ({
     file,
@@ -20,7 +21,17 @@ export const ImageUpload = ({
         <Modal dimmer="inverted" open={true}>
             <Modal.Header>Send image?</Modal.Header>
             <Modal.Content>
-
+            {crop ? (
+                <AvatarEditor 
+                    ref={cropRef}
+                    width={175}
+                    height={175}
+                    border={50}
+                    image={image}
+                />
+            ) : (
+                <Image size="medium" src={image} />
+            )}
             </Modal.Content>
             <Modal.Actions>
                 <div className="image-upload-actions">
@@ -31,13 +42,14 @@ export const ImageUpload = ({
                         className="submit"
                         onClick={() => {
                             if (crop && cropRef) {
-                                const canvas = cropRef
+                                const canvas = cropRef.current.getImageScaledToCanvas().toDataURL();
+                            fetch(canvas).then(res => res.blob()).then(b => onSubmit(b));
                             } else {
-
+                                onSubmit();
                             }
                         }}>Upload</button>
                 </div>
             </Modal.Actions>
         </Modal>
-    )
-}
+    );
+};
