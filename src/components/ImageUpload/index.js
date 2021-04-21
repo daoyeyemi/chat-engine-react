@@ -1,5 +1,6 @@
-import { Modal } from "semantic-ui-react";
+import { Image, Modal } from "semantic-ui-react";
 import AvatarEditor from "react-avatar-editor";
+import { useEffect, useRef, useState } from "react";
 
 export const ImageUpload = ({
     file,
@@ -8,12 +9,12 @@ export const ImageUpload = ({
     crop = false
 }) => {
     
-    const [image, setImage] = useState("");
+    const [imageURL, setImageURL] = useState("");
     const cropRef = useRef();
 
     useEffect(() => {
         const fileReader = new FileReader();
-        fileReader.onload = () => setImage(fileReader.result);
+        fileReader.onload = () => setImageURL(fileReader.result);
         fileReader.readAsDataURL(file);
     }, [file]);
 
@@ -27,15 +28,15 @@ export const ImageUpload = ({
                     width={175}
                     height={175}
                     border={50}
-                    image={image}
+                    image={imageURL}
                 />
             ) : (
-                <Image size="medium" src={image} />
+                <Image size="medium" src={imageURL} />
             )}
             </Modal.Content>
             <Modal.Actions>
                 <div className="image-upload-actions">
-                    <button className="cancel">
+                    <button className="cancel" onClick={close}>
                         Cancel
                     </button>
                     <button 
