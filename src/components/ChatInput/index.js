@@ -1,4 +1,8 @@
 import { sendMessage } from "react-chat-engine";
+import { ImageUpload } from "../ImageUpload";
+import { useState, useRef } from "react";
+import { Icon } from "semantic-ui-react";
+import { useChat } from "../../context/ChatContext";
 
 export const ChatInput = () => {
     const chatConfig = useChat().chatConfig;
@@ -33,16 +37,54 @@ export const ChatInput = () => {
                     input.value = "";
                     input.click()
                 }
-            }} >
-
+            }}>
+                <Icon name="attach" color="red" />
             </div>
             <input 
                 className="chat-input"
                 placeholder="Send message"
+                onKeyPress={event => {
+                   if (event.key === "Enter") {
+                       sendChatMess();
+                   }
+                }}
+                onChange={event => setChatInputText(event.target.value)}
             />
-            <div className="send-message-icon"></div>
+            <div onClick={sendChatMessage} className="send-message-icon">
+                <Icon name="send" color="grey" />
+            </div>
+                
+            <input 
+                type="file"
+                ref={inputRef}
+                className="file-input"
+                accept="image/jpeg, image/png"
+                onChange={event => {
+                    const doc = event.target?.files?.[0];
+                    if (doc) {
+                        onFileAttach(file);
+                    }
+                }}
+            />
 
-            <input />
+            {imageModalOpen && !!image && (
+                <ImageUpload 
+                    file={image}
+                    mode="message"
+                    onSubmit={() => {
+                        sendMessage(chatConfig, selectedChat.id,
+                            {
+                                text: chatInputText,
+                                files: [image]
+                            },
+                            () => {
+                                setImage(null);
+                                setChatInputText("");
+                            })
+                    }}
+                    close={() => setImageModalOpen(false)}
+                />
+            )}
         </div>
         </>
         
