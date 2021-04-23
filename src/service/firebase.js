@@ -1,25 +1,30 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/storage";
-import "firebase/firestore";
+import firebase from 'firebase/app'; // <-- This must be first
+import 'firebase/auth';
+import 'firebase/storage';
+import 'firebase/firestore';
 
 try {
-    firebase.initializeApp({
-        apiKey: "AIzaSyBtytpZSqmRXKh7TvSA9GEKbDaK4hRNQCU",
-        authDomain: "chat-react-app-b84e1.firebaseapp.com", 
-        projectId: "chat-react-app-b84e1", 
-        storageBucket: "chat-react-app-b84e1.appspot.com", 
-        messagingSenderId: "513552426295", 
-        appId: "1:513552426295:web:aac5bacab508c8e4a626b2" 
-    });
+  firebase.initializeApp({
+    apiKey: "AIzaSyDzkmp_f4J0KNIdDzKTl5Rnwe-6emWgJRU",
+    authDomain: "chat-demo-ae898.firebaseapp.com",
+    // databaseURL: gs://chat-demo-ae898.appspot.com,
+    projectId: "chat-demo-ae898",
+    storageBucket: "chat-demo-ae898.appspot.com",
+    messagingSenderId: "738616742899",
+    appId: "1:738616742899:web:ec9ad888e0ffd20b2bf886"
+  });
 } catch (error) {
-    if (!/already exists/u.test(error.message)) {
-        console.error("Firebase admin initialization error", error.stack)
-    }
+  if (!/already exists/u.test(error.message)) {
+    console.error('Firebase admin initialization error', error.stack);
+  }
 }
 
+// Passing off firebase.auth() instead of firebase.auth
+// allows us to share the same instance of Firebase throughout
+// the entire app whenever we import it from here.
+
 export const fb = {
-    auth: firebase.auth(),
-    storage: firebase.storage(),
-    firestore: firebase.firestore()
+  auth: firebase.auth(),
+  storage: firebase.storage(),
+  firestore: firebase.firestore(),
 };

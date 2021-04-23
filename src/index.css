@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Ubuntu Mono', monospace, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -8,8 +8,9 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'Ubuntu Mono', monospace;
+  /* source-code-pro, Menlo, Monaco, Consolas, 'Courier New', */
+    /* monospace; */
 }
 .app {
   width: 100vw;
@@ -77,6 +78,7 @@ code {
   flex: 1;
   height: 100%;
   display: flex;
+  background-color: rgb(8, 8, 65);
 }
 .left-rail {
   height: 100%;
@@ -98,7 +100,7 @@ code {
   height: 75px;
   width: 100%;
   padding: 10px;
-
+  font: 'Ubuntu Mono';
   align-items: center;
   box-shadow: 0px 0px 2px black;
   justify-content: space-between;
@@ -113,7 +115,7 @@ code {
 }
 .chat-list-item .selected,
 .chat-list-item:hover {
-  background-color: #18181d;
+  background-color: rgb(36, 36, 163);
 }
 .chat-list-avatar {
   width: 28px;
@@ -121,7 +123,7 @@ code {
   border-radius: 100%;
 }
 .selected-chat-item {
-  background-color: #18181d;
+  background-color: rgb(8, 8, 65);
 }
 .chat-item-delete {
   width: 35px;
@@ -139,14 +141,7 @@ code {
   margin-left: 10px;
 }
 .create-chat-button {
-  width: 100%;
-  height: 50px;
-  border: none;
-  outline: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 0px;
-  background-color: #030a24;
+  margin-left: 100px;
 }
 .preview-message {
   font-size: 12px;
@@ -175,7 +170,7 @@ code {
   padding: 10px;
   position: relative;
   align-items: center;
-  background-color: #161616;
+  background-color: rgba(3, 3, 49, 0.849);
   box-shadow: 0px 0px 2px black;
 }
 .current-user-info {
@@ -201,7 +196,7 @@ code {
   height: 100%;
   display: flex;
   justify-content: center;
-  background-color: #292b31;
+  background-color: #02040a;
 }
 .no-chat-selected {
   display: flex;
@@ -212,7 +207,7 @@ code {
   align-items: center;
   border-radius: 10px;
   justify-content: center;
-  background-color: #4d515d;
+  background-color: #02040a;
   box-shadow: 0px 0px 3px black;
 
   -webkit-touch-callout: none;
@@ -265,11 +260,13 @@ code {
   padding-top: 0px;
   padding-bottom: 0px;
   height: calc(100% - 105px);
+ 
 }
 .chat-message {
   display: flex;
   margin-top: 25px;
-  flex-direction: column;
+  flex-direction: column; 
+  background-color: black;
 }
 .message-image {
   width: 250px;
@@ -292,6 +289,7 @@ code {
 }
 .message-author {
   font-size: 24px;
+  padding-left: 7px;
 }
 .message-content {
   padding-left: 25px;
@@ -410,4 +408,10 @@ code {
   top: 5px;
   right: 5px;
   cursor: pointer;
+}
+
+.ce-chat-feed, .ce-chats-container, .ce-settings {
+  display: none;
+  z-index: -100;
+  visibility: hidden;
 }
