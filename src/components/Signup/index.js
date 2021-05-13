@@ -49,9 +49,9 @@ export const Signup = () => {
 
   return (
     <div>
-      <h1>Let Us Chat</h1>
+      <div className="title" style={{ marginTop: "220px"}}>let us chat .</div>
     <div className="auth-form">
-      <h1>Signup</h1>
+      <h1>sign up</h1>
       <Formik
         onSubmit={signup}
         validateOnMount={true}
@@ -60,30 +60,29 @@ export const Signup = () => {
       >
         {({ isValid, isSubmitting }) => (
           <Form>
-            <FormField name="userName" label="User Name" />
-            <FormField name="email" label="Email" type="email" />
-            <FormField name="password" label="Password" type="password" />
+            <FormField name="userName" label="username" />
+            <FormField name="email" label="email" type="email" />
+            <FormField name="password" label="password" type="password" />
             <FormField
               type="password"
               name="verifyPassword"
-              label="Verify Password"
+              label="verify password"
             />
 
             <div className="auth-link-container">
-              Already have an account?{' '}
-              <span className="auth-link" onClick={() => history.push('login')}>
-                Log In!
+             <span className="auth-link" onClick={() => history.push('login')}>
+               have an account already? log in here
               </span>
             </div>
 
             <button disabled={isSubmitting || !isValid} type="submit">
-              Sign Up
+              sign up
             </button>
           </Form>
         )}
       </Formik>
 
-      {!!serverError && <div className="error">{serverError}</div>}
+      {serverError && <div className="error">{serverError}</div>}
     </div>
     </div>
     

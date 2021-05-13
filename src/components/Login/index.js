@@ -33,9 +33,9 @@ export const Login = () => {
 
   return (
     <div>
-      <h1>Let Us Chat</h1>
+      <div className="title" style={{ marginTop: "25px"}}>let us chat .</div>
     <div className="auth-form">
-      <h1>Login</h1>
+      <h1>login</h1>
       <Formik
         onSubmit={login}
         validateOnMount={true}
@@ -44,16 +44,15 @@ export const Login = () => {
       >
         {({ isValid, isSubmitting }) => (
           <Form>
-            <FormField name="email" label="Email" type="email" />
-            <FormField name="password" label="Password" type="password" />
+            <FormField name="email" label="email" type="email" />
+            <FormField name="password" label="password" type="password" />
 
             <div className="auth-link-container">
-              Don't have an account?{' '}
               <span
                 className="auth-link"
                 onClick={() => history.push('signup')}
               >
-                Sign Up!
+               don't have an account yet? sign up here 
               </span>
             </div>
 
@@ -64,7 +63,7 @@ export const Login = () => {
         )}
       </Formik>
 
-      {!!serverError && <div className="error">{serverError}</div>}
+      {serverError && <div className="error">{serverError}</div>}
     </div>
     </div>
   

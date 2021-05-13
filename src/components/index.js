@@ -12,3 +12,4 @@ export * from './ChatToolbar';
 export * from './SearchUsers';
 export * from './MessageList';
 export * from './ImageUpload';
+export * from './Landing';

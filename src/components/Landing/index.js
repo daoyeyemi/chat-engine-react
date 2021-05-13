@@ -1,17 +1,26 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 import "./styles.css";
 
-function Landing() {
+export const Landing = () => {
+    let history = useHistory();
+
+    function goToLogin() {
+        history.push("/login")
+    }
+
+    function goToSignUp() {
+        history.push("/signup")
+    }
+    
     return (
-        <div>
-            <h1>Let Us Chat</h1>
-            <h2>an interactive chat application for coders and noncoders alike</h2>
+        <div className="container">
+            <div className="title">let us chat .</div>
+            <div className="sub-title">an interactive chat application for coders and noncoders alike</div>
             <div className="buttons">
-                <button>Signup</button>
-                <button>Login</button>
+            <button onClick={goToLogin} type="button" class="btn btn-warning btn-lg">Login</button>
+            <button onClick={goToSignUp} type="button" class="btn btn-danger btn-lg">Signup</button>
             </div>
         </div>
     )
 }
-
-export default Landing

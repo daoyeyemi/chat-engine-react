@@ -1,3 +1,24 @@
-button {
+.title {
+    font-size: 100px;
     text-align: center;
+    margin: 10px;
+    padding-bottom: 15px;
+}
+
+.sub-title {
+    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    white-space: normal;
+    text-align: center;
+}
+
+.buttons {
+    text-align: center;
+}
+
+button {
+    margin: 10px;
 }
