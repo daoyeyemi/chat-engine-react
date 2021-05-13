@@ -49,6 +49,7 @@ export const Signup = () => {
 
   return (
     <div className="auth-form">
+      <h1>Let Us Chat</h1>
       <h1>Signup</h1>
       <Formik
         onSubmit={signup}

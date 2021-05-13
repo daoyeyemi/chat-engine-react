@@ -200,7 +200,7 @@ code {
 }
 .no-chat-selected {
   display: flex;
-  font-size: 28px;
+  font-size: 40px;
   padding: 25px;
   color: #abaebb;
   align-self: center;
@@ -209,6 +209,7 @@ code {
   justify-content: center;
   background-color: #02040a;
   box-shadow: 0px 0px 3px black;
+  padding-left: 15px;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -414,4 +415,9 @@ code {
   display: none;
   z-index: -100;
   visibility: hidden;
+}
+
+.arrow-left {
+  padding-top: 23px;
+  margin-right: 10px;
 }

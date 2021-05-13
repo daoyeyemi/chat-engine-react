@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useChat } from 'context';
 import { getChats, ChatEngine } from 'react-chat-engine';
 import { LeftRail, ChatToolbar, ChatInput, MessageList } from 'components';
+import { Icon } from "semantic-ui-react";
 
 export const Chat = () => {
   const {
@@ -79,11 +80,9 @@ export const Chat = () => {
             </div>
           ) : (
             <div className="no-chat-selected">
-              <img
-                src="/img/pointLeft.png"
-                className="point-left"
-                alt="point-left"
-              />
+              <div className="arrow-left">
+                <Icon name="arrow alternate circle left outline" />
+              </div>
               Choose a Chat
             </div>
           )}
