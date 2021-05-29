@@ -21,15 +21,15 @@
   };
 
 export const useResolved = (...vals) => {
-    const [resolved, setResolved] = useState(false);
+  const [resolved, setResolved] = useState(false);
 
-    useEffect(() => {
-        setResolved(vals.every(v => v !== undefined));
-    }, [vals]);
+  useEffect(() => {
+      setResolved(vals.every(v => v !== undefined));
+  }, [vals]);
 
-    // if every value is not resolved return true
-    return resolved;
-    };
+  // if every value is not resolved return true
+  return resolved;
+};
 
 export const useDebounce = (value, delay) => {
   const [debouncedValue, setDebouncedValue] = useState(value);

@@ -30,7 +30,7 @@ export const RailHeader = () => {
         }}
       />
 
-      {!!image && (
+      {image && (
         <ImageUpload
           crop
           file={image}
