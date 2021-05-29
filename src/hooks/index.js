@@ -20,16 +20,14 @@
     };
   };
 
-export const useResolved = (
-    ...vals
-    ) => {
+export const useResolved = (...vals) => {
     const [resolved, setResolved] = useState(false);
 
     useEffect(() => {
         setResolved(vals.every(v => v !== undefined));
     }, [vals]);
 
-    // Returns true if resolved otherwise false
+    // if every value is not resolved return true
     return resolved;
     };
 

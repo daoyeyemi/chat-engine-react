@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useChat } from 'context';
 import { joinUsernames } from 'helpers';
 import { Icon } from 'semantic-ui-react';
-import { SearchUsers } from 'components';
+import { SearchUsers } from 'components/SearchUsers';
 
 export const ChatToolbar = () => {
   const { selectedChat, chatConfig } = useChat();

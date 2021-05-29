@@ -1,5 +1,5 @@
 import { useChat } from 'context';
-import { ChatAvatar } from 'components';
+import { ChatAvatar } from 'components/ChatAvatar';
 import { groupMessages } from 'helpers';
 import { useScrollToBottom } from 'hooks';
 

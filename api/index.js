@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const createUser = (req, res) => {
+const createUser = async (req, res) => {
   const { userId, userName } = req.body;
 
   axios
@@ -21,5 +21,5 @@ const createUser = (req, res) => {
       });
     });
 };
-
+// catch() returns a promise and deals with rejected cases
 export default createUser;

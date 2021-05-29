@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import { useChat } from 'context';
 import { getChats, ChatEngine } from 'react-chat-engine';
-import { LeftRail, ChatToolbar, ChatInput, MessageList } from 'components';
+import { LeftRail } from 'components/LeftRail';
+import { ChatToolbar } from 'components/ChatToolbar';
+import { ChatInput } from 'components/ChatInput';
+import { MessageList } from 'components/MessageList';
 import { Icon } from "semantic-ui-react";
 
 export const Chat = () => {

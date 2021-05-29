@@ -15,11 +15,11 @@ export const Landing = () => {
     
     return (
         <div className="container">
-            <div className="title">let us chat .</div>
+            <div className="title">let us chat</div>
             <div className="sub-title">an interactive chat application for coders and noncoders alike</div>
             <div className="buttons">
-            <button onClick={goToLogin} type="button" class="btn btn-warning btn-lg">Login</button>
-            <button onClick={goToSignUp} type="button" class="btn btn-danger btn-lg">Signup</button>
+            <button onClick={goToLogin} type="button" class="btn btn-warning btn-lg">login</button>
+            <button onClick={goToSignUp} type="button" class="btn btn-danger btn-lg">signup</button>
             </div>
         </div>
     )

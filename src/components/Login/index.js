@@ -33,7 +33,7 @@ export const Login = () => {
 
   return (
     <div>
-      <div className="title" style={{ marginTop: "25px"}}>let us chat .</div>
+      <div className="title" style={{ marginTop: "25px"}}>let us chat</div>
     <div className="auth-form">
       <h1>login</h1>
       <Formik
@@ -56,8 +56,8 @@ export const Login = () => {
               </span>
             </div>
 
-            <button type="submit" disabled={!isValid || isSubmitting}>
-              Login
+            <button style={{backgroundColor: "#B22222"}} className="btn btn-warning" type="submit" disabled={!isValid || isSubmitting}>
+              login
             </button>
           </Form>
         )}

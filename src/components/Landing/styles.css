@@ -6,13 +6,15 @@
 }
 
 .sub-title {
-    font-size: 40px;
+    font-size: 25px;
     margin-top: 20px;
     margin-bottom: 20px;
+    white-space: normal;
     padding-top: 30px;
     padding-bottom: 10px;
     white-space: normal;
     text-align: center;
+    flex: auto;
 }
 
 .buttons {
