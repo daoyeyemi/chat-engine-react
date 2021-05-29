@@ -5,14 +5,14 @@
     const [authUser, setAuthUser] = useState();
   
     useEffect(() => {
-      const unsubscribe = fb.auth.onAuthStateChanged(user => {
+      const userState = fb.auth.onAuthStateChanged(user => {
         if (user) {
           setAuthUser(user);
         } else {
           setAuthUser(null);
         }
       });
-      return unsubscribe;
+      return userState;
     }, []);
   
     return {
@@ -20,14 +20,14 @@
     };
   };
 
-export const useResolved = (...vals) => {
+export const useResolved = (...values) => {
   const [resolved, setResolved] = useState(false);
 
   useEffect(() => {
-      setResolved(vals.every(v => v !== undefined));
-  }, [vals]);
-
-  // if every value is not resolved return true
+      setResolved(values.every(val => val !== undefined));
+    // run sideEffect whenever set of parameters change
+  }, [values]);
+// if every value is not resolved return true
   return resolved;
 };
 
@@ -49,7 +49,7 @@ export const useScrollToBottom = (trigger, className) => {
     // Because we are dealing with images as well, we need to wait
     // until the images have loaded fully before doing the scroll.
     useEffect(() => {
-      if (!!trigger) {
+      if (trigger) {
         Promise.all(
           Array.from(document.images)
             .filter(img => !img.complete)
