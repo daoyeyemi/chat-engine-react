@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
+import { Chat } from 'components/Chat';
 import { ChatProvider } from 'context';
 import 'semantic-ui-css/semantic.min.css';
 import { useAuth, useResolved } from 'hooks';
 import { Login } from 'components/Login';
 import { Signup } from 'components/Signup';
-import { Chat } from 'components/Chat';
 import { Switch, Route, useHistory } from 'react-router-dom';
+import { Dimmer, Loader }  from "semantic-ui-react";
 
 export const App = () => {
   const history = useHistory();
@@ -32,6 +33,10 @@ export const App = () => {
       </div>
     </ChatProvider>
   ) : (
-    <>Loading...</>
+    <>
+      <Dimmer active>
+        <Loader />
+      </Dimmer>
+    </>
   );
 };

@@ -5,6 +5,7 @@ import { LeftRail } from 'components/LeftRail';
 import { ChatToolbar } from 'components/ChatToolbar';
 import { ChatInput } from 'components/ChatInput';
 import { MessageList } from 'components/MessageList';
+import { Icon } from 'semantic-ui-react';
 
 export const Chat = () => {
   const {
@@ -80,11 +81,7 @@ export const Chat = () => {
             </div>
           ) : (
             <div className="no-chat-selected">
-              <img
-                src="/img/pointLeft.png"
-                className="point-left"
-                alt="point-left"
-              />
+              <Icon size='big' name='angle double left' />
               Select A Chat
             </div>
           )}
