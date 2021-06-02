@@ -1,5 +1,5 @@
-import { useChat } from 'context';
-import { useResolved } from 'hooks';
+import { useChat } from '../../context';
+import { useResolved } from '../../hooks';
 import { ChatList } from 'components/ChatList';
 import { RailHeader } from 'components/RailHeader';
 import { Loader } from 'semantic-ui-react';
@@ -22,7 +22,7 @@ export const LeftRail = () => {
               <h3>No Chats Yet</h3>
             </div>
           )}
-          <button style={{ font: "Arial", backgroundColor: "gray", fontWeight:"bold"}} className="create-chat-button btn btn-secondary" onClick={createChatClick}>
+          <button className="create-chat-button" onClick={createChatClick}>
             Create Chat
           </button>
         </>
@@ -34,4 +34,3 @@ export const LeftRail = () => {
     </div>
   );
 };
-

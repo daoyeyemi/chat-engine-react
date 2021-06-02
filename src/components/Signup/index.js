@@ -1,4 +1,4 @@
-import { fb } from 'service';
+import { fb } from '../../service';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -48,10 +48,8 @@ export const Signup = () => {
   };
 
   return (
-    <div>
-      <div className="title" style={{ marginTop: "205px"}}>let us chat</div>
     <div className="auth-form">
-      <h1>sign up</h1>
+      <h1>Signup</h1>
       <Formik
         onSubmit={signup}
         validateOnMount={true}
@@ -60,31 +58,30 @@ export const Signup = () => {
       >
         {({ isValid, isSubmitting }) => (
           <Form>
-            <FormField name="userName" label="username" />
-            <FormField name="email" label="email" type="email" />
-            <FormField name="password" label="password" type="password" />
+            <FormField name="userName" label="User Name" />
+            <FormField name="email" label="Email" type="email" />
+            <FormField name="password" label="Password" type="password" />
             <FormField
               type="password"
               name="verifyPassword"
-              label="verify password"
+              label="Verify Password"
             />
 
             <div className="auth-link-container">
-             <span className="auth-link" onClick={() => history.push('login')}>
-               have an account already? log in here
+              Already have an account?{' '}
+              <span className="auth-link" onClick={() => history.push('login')}>
+                Log In!
               </span>
             </div>
 
-            <button style={{backgroundColor: "#B22222" }} className="btn btn-warning" disabled={isSubmitting || !isValid} type="submit">
-              signup
+            <button disabled={isSubmitting || !isValid} type="submit">
+              Sign Up
             </button>
           </Form>
         )}
       </Formik>
 
-      {serverError && <div className="error">{serverError}</div>}
+      {!!serverError && <div className="error">{serverError}</div>}
     </div>
-    </div>
-    
   );
 };

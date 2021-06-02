@@ -1,5 +1,5 @@
-import { fb } from 'service';
-import { useChat } from 'context';
+import { fb } from '../../service';
+import { useChat } from '../../context';
 import { Image } from 'semantic-ui-react';
 import React, { useEffect, useState } from 'react';
 
@@ -21,13 +21,12 @@ export const ChatAvatar = ({ chat, username, className }) => {
   }, [chat, chatConfig, username]);
 
   return avatar ? (
-    <Image className={'chat-list-avatar'} src={avatar} />
+    <Image className={className || 'chat-list-avatar'} src={avatar} />
   ) : (
-    <div className={'empty-avatar'}>
+    <div className={className || 'empty-avatar'}>
       {chat.people
         .find(p => p.person.username !== chatConfig.userName)
         .person.username[0].toUpperCase()}
     </div>
   );
 };
-

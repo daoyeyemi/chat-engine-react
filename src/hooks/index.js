@@ -1,34 +1,23 @@
- import { useState, useEffect } from 'react';
- import { fb } from '../service';
+import { fb } from 'service';
+import { useEffect, useState } from 'react';
 
- export const useAuth = () => {
-    const [authUser, setAuthUser] = useState();
-  
-    useEffect(() => {
-      const userState = fb.auth.onAuthStateChanged(user => {
-        if (user) {
-          setAuthUser(user);
-        } else {
-          setAuthUser(null);
-        }
-      });
-      return userState;
-    }, []);
-  
-    return {
-      authUser,
-    };
-  };
-
-export const useResolved = (...values) => {
-  const [resolved, setResolved] = useState(false);
+export const useAuth = () => {
+  const [authUser, setAuthUser] = useState(); // undefined | firebase.User | null
 
   useEffect(() => {
-      setResolved(values.every(val => val !== undefined));
-    // run sideEffect whenever set of parameters change
-  }, [values]);
-// if every value is not resolved return true
-  return resolved;
+    const unsubscribe = fb.auth.onAuthStateChanged(user => {
+      if (user) {
+        setAuthUser(user);
+      } else {
+        setAuthUser(null);
+      }
+    });
+    return unsubscribe;
+  }, []);
+
+  return {
+    authUser,
+  };
 };
 
 export const useDebounce = (value, delay) => {
@@ -42,14 +31,21 @@ export const useDebounce = (value, delay) => {
   return debouncedValue;
 };
 
-export const useScrollToBottom = (trigger, className) => {
-    // Scrolls to the bottom of a container with a 
-    // given className when active is flipped to true
-  
-    // Because we are dealing with images as well, we need to wait
-    // until the images have loaded fully before doing the scroll.
+export const useResolved = (...vals) => {
+    const [resolved, setResolved] = useState(false);
+
     useEffect(() => {
-      if (trigger) {
+        setResolved(vals.every(v => v !== undefined));
+    }, [vals]);
+
+    // Returns true if resolved otherwise false
+    return resolved;
+};
+
+export const useScrollToBottom = (trigger, className) => {
+   
+    useEffect(() => {
+      if (!!trigger) {
         Promise.all(
           Array.from(document.images)
             .filter(img => !img.complete)
@@ -63,3 +59,6 @@ export const useScrollToBottom = (trigger, className) => {
       }
     }, [trigger, className]);
   };
+
+  
+  

@@ -21,5 +21,5 @@ const createUser = async (req, res) => {
       });
     });
 };
-// catch() returns a promise and deals with rejected cases
+
 export default createUser;

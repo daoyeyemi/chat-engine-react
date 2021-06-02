@@ -1,4 +1,4 @@
-import { useChat } from 'context';
+import { useChat } from '../../context';
 import { useState, useRef } from 'react';
 import { Icon } from 'semantic-ui-react';
 import { ImageUpload } from 'components/ImageUpload';

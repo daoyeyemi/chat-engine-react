@@ -7,7 +7,7 @@ try {
   firebase.initializeApp({
     apiKey: "AIzaSyDzkmp_f4J0KNIdDzKTl5Rnwe-6emWgJRU",
     authDomain: "chat-demo-ae898.firebaseapp.com",
-    // databaseURL: gs://chat-demo-ae898.appspot.com,
+    // databaseURL: process.env.REACT_APP_DATABASE_URL,
     projectId: "chat-demo-ae898",
     storageBucket: "chat-demo-ae898.appspot.com",
     messagingSenderId: "738616742899",

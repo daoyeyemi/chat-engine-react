@@ -1,8 +1,8 @@
 import React from 'react';
-import { useChat } from 'context';
+import { useChat } from '../../context';
 import { ChatAvatar } from 'components/ChatAvatar';
 import { Icon } from 'semantic-ui-react';
-import { joinUsernames, notMe } from 'helpers';
+import { joinUsernames, notMe } from '../../helpers';
 
 export const ChatList = () => {
   const {

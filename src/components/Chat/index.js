@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-import { useChat } from 'context';
+import { useChat } from '../../context';
 import { getChats, ChatEngine } from 'react-chat-engine';
 import { LeftRail } from 'components/LeftRail';
 import { ChatToolbar } from 'components/ChatToolbar';
 import { ChatInput } from 'components/ChatInput';
 import { MessageList } from 'components/MessageList';
-import { Icon } from "semantic-ui-react";
 
 export const Chat = () => {
   const {
@@ -54,10 +53,8 @@ export const Chat = () => {
             if (selectedChat && chatId === selectedChat.id) {
               setSelectedChat({
                 ...selectedChat,
-                messages: [...selectedChat.messages, message]
+                messages: [...selectedChat.messages, message],
               });
-              console.log(message);
-              console.log(selectedChat);
             }
             const chatThatMessageBelongsTo = myChats.find(c => c.id === chatId);
             const filteredChats = myChats.filter(c => c.id !== chatId);
@@ -83,10 +80,12 @@ export const Chat = () => {
             </div>
           ) : (
             <div className="no-chat-selected">
-              <div className="arrow-left">
-                <Icon name="arrow alternate circle left outline" />
-              </div>
-              Choose a Chat
+              <img
+                src="/img/pointLeft.png"
+                className="point-left"
+                alt="point-left"
+              />
+              Select A Chat
             </div>
           )}
         </div>

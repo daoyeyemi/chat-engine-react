@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useChat } from 'context';
-import { joinUsernames } from 'helpers';
+import { useChat } from '../../context';
+import { joinUsernames } from '../../helpers';
 import { Icon } from 'semantic-ui-react';
 import { SearchUsers } from 'components/SearchUsers';
 
@@ -20,7 +20,7 @@ export const ChatToolbar = () => {
 
         <div className="add-user-icon">
           <Icon
-            color="yellow"
+            color="grey"
             name="user plus"
             onClick={() => setSearching(true)}
           />
@@ -31,4 +31,3 @@ export const ChatToolbar = () => {
     </>
   );
 };
-

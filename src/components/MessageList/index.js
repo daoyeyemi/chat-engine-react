@@ -1,7 +1,7 @@
-import { useChat } from 'context';
+import { useChat } from '../../context';
 import { ChatAvatar } from 'components/ChatAvatar';
-import { groupMessages } from 'helpers';
-import { useScrollToBottom } from 'hooks';
+import { groupMessages } from '../../helpers';
+import { useScrollToBottom } from '../../hooks';
 
 export const MessageList = () => {
   const { selectedChat } = useChat();

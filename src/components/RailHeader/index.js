@@ -1,6 +1,6 @@
-import { fb } from 'service';
-import { useChat } from 'context';
-import { useResolved } from 'hooks';
+import { fb } from '../../service';
+import { useChat } from '../../context';
+import { useResolved } from '../../hooks';
 import { useRef, useState } from 'react';
 import { ImageUpload } from 'components/ImageUpload';
 import { Icon, IconGroup, Image, Loader } from 'semantic-ui-react';
@@ -30,7 +30,7 @@ export const RailHeader = () => {
         }}
       />
 
-      {image && (
+      {!!image && (
         <ImageUpload
           crop
           file={image}

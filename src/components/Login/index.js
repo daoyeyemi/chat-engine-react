@@ -1,8 +1,8 @@
-import { fb } from 'service';
+import { fb } from '../../service';
 import { useState } from 'react';
 import { Form, Formik } from 'formik';
 import { useHistory } from 'react-router-dom';
-import { FormField } from 'components/FormField';
+import { FormField } from '../FormField';
 import { validationSchema, defaultValues } from './formikConfig';
 
 export const Login = () => {
@@ -32,10 +32,8 @@ export const Login = () => {
   };
 
   return (
-    <div>
-      <div className="title" style={{ marginTop: "25px"}}>let us chat</div>
     <div className="auth-form">
-      <h1>login</h1>
+      <h1>Login</h1>
       <Formik
         onSubmit={login}
         validateOnMount={true}
@@ -44,28 +42,27 @@ export const Login = () => {
       >
         {({ isValid, isSubmitting }) => (
           <Form>
-            <FormField name="email" label="email" type="email" />
-            <FormField name="password" label="password" type="password" />
+            <FormField name="email" label="Email" type="email" />
+            <FormField name="password" label="Password" type="password" />
 
             <div className="auth-link-container">
+              Don't have an account?{' '}
               <span
                 className="auth-link"
                 onClick={() => history.push('signup')}
               >
-               don't have an account yet? sign up here 
+                Sign Up!
               </span>
             </div>
 
-            <button style={{backgroundColor: "#B22222"}} className="btn btn-warning" type="submit" disabled={!isValid || isSubmitting}>
-              login
+            <button type="submit" disabled={!isValid || isSubmitting}>
+              Login
             </button>
           </Form>
         )}
       </Formik>
 
-      {serverError && <div className="error">{serverError}</div>}
+      {!!serverError && <div className="error">{serverError}</div>}
     </div>
-    </div>
-  
   );
 };
