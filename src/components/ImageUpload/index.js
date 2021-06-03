@@ -40,11 +40,8 @@ export const ImageUpload = ({
 
       <Modal.Actions>
         <div className="image-upload-actions">
-          <button className="cancel" onClick={close}>
-            Cancel
-          </button>
-          <button
-            className="submit"
+          <button className="cancel" onClick={close}>Cancel</button>
+          <button className="submit" 
             onClick={() => {
               if (crop && cropRef) {
                 const canvas = cropRef.current
@@ -56,8 +53,7 @@ export const ImageUpload = ({
               } else {
                 onSubmit();
               }
-            }}
-          >
+            }}>
             Upload
           </button>
         </div>

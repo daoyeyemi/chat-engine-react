@@ -4,14 +4,8 @@ import { Avatar } from 'components/Avatar';
 import { Icon } from 'semantic-ui-react';
 import { joinUsernames, notMe } from '../../helpers';
 
-export const ChatList = () => {
-  const {
-    personalChats,
-    chatInfo,
-    chosenChat,
-    selectChatFunc,
-    deleteChatFunc,
-  } = useChat();
+export const List = () => {
+  const { personalChats, chatInfo, chosenChat, selectChatFunc, deleteChatFunc } = useChat();
 
   return (
     <div className="chat-list">
@@ -40,7 +34,7 @@ export const ChatList = () => {
               </>
             ) : (
               <>
-                <Icon circular inverted color="brown" name="users" />
+                <Icon circular inverted color="blue" name="users" />
                 <div className="chat-list-preview">
                   <div className="preview-username">
                     {joinUsernames(c.people, chatInfo.userName).slice(0, 50)}

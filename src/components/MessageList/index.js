@@ -21,7 +21,6 @@ export const MessageList = () => {
               {m.map((individualMessage, index) => (
                 <div key={index}>
                   <div className="message-text">{individualMessage.text}</div>
-
                   {!!individualMessage.attachments.length && (
                     <img alt={individualMessage.id + '-attachment'} src={individualMessage.attachments[0].file} className="message-image" />
                   )}

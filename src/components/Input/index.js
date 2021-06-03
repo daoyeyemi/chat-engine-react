@@ -4,7 +4,7 @@ import { Icon } from 'semantic-ui-react';
 import { ImageUpload } from 'components/ImageUpload';
 import { sendMessage } from 'react-chat-engine';
 
-export const ChatInput = () => {
+export const Input = () => {
   const { chatInfo, chosenChat } = useChat();
   const [chatInputText, setChatInputText] = useState('');
   const [imageModalOpen, setImageModalOpen] = useState(false);
@@ -42,39 +42,25 @@ export const ChatInput = () => {
         >
           <Icon name="attach" color="grey" />
         </div>
-        <input
-          value={chatInputText}
-          className="chat-input"
-          placeholder="Send a message"
-          onKeyPress={e => {
+        <input value={chatInputText} className="chat-input" placeholder="Send a message" onKeyPress={e => {
             if (e.key === 'Enter') {
               sendChatMessage();
             }
-          }}
-          onChange={e => setChatInputText(e.target.value)}
-        />
+          }} onChange={e => setChatInputText(e.target.value)} />
         <div onClick={sendChatMessage} className="send-message-icon">
           <Icon name="send" color="grey" />
         </div>
       </div>
 
-      <input
-        type="file"
-        ref={inputRef}
-        className="file-input"
-        accept="image/jpeg,image/png"
-        onChange={e => {
+      <input type="file" ref={inputRef} className="file-input" accept="image/jpeg,image/png" onChange={e => {
           const file = e.target?.files?.[0];
           if (file) {
             onFileAttach(file);
-          }
-        }}
+          } }}
       />
 
       {imageModalOpen && !!image && (
-        <ImageUpload
-          file={image}
-          mode="message"
+        <ImageUpload file={image} mode="message"
           onSubmit={() => {
             sendMessage(
               chatInfo,

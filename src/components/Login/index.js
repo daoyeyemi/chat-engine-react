@@ -28,8 +28,11 @@ export const Login = () => {
   };
 
   return (
+    <>
+    
     <div className="auth-form">
-      <h1>Login</h1>
+      <h1 className="entry-title" style={{ fontSize: "100px" }}>let us chat</h1>
+      <h1 className="entry-title">login</h1>
       <Formik onSubmit={login} validateOnMount={true} initialValues={defaultValues} validationSchema={validationSchema}>
         {({ isValid, isSubmitting }) => (
           <Form>
@@ -37,23 +40,19 @@ export const Login = () => {
             <FormField name="password" label="Password" type="password" />
 
             <div className="auth-link-container">
-              Don't have an account?{' '}
-              <span
-                className="auth-link"
-                onClick={() => history.push('signup')}
-              >
-                Sign Up!
+              don't have an account yet ?{' '}
+              <span className="auth-link" onClick={() => history.push('signup')}>
+                sign up here
               </span>
             </div>
 
-            <button type="submit" disabled={!isValid || isSubmitting}>
-              Login
-            </button>
+            <button type="submit" disabled={!isValid || isSubmitting}>Login</button>
           </Form>
         )}
       </Formik>
 
       {!!serverError && <div className="error">{serverError}</div>}
     </div>
+    </>
   );
 };

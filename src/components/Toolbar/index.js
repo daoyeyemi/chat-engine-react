@@ -4,7 +4,7 @@ import { joinUsernames } from '../../helpers';
 import { Icon } from 'semantic-ui-react';
 import { SearchUsers } from 'components/SearchUsers';
 
-export const ChatToolbar = () => {
+export const Toolbar = () => {
   const { chosenChat, chatInfo } = useChat();
   const [searching, setSearching] = useState(false);
 

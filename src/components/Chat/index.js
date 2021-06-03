@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useChat } from '../../context';
 import { getChats, ChatEngine } from 'react-chat-engine';
 import { LeftRail } from 'components/LeftRail';
-import { ChatToolbar } from 'components/ChatToolbar';
-import { ChatInput } from 'components/ChatInput';
+import { Toolbar } from 'components/Toolbar';
+import { Input } from 'components/Input';
 import { MessageList } from 'components/MessageList';
 import { Icon } from 'semantic-ui-react';
 
@@ -50,9 +50,9 @@ export const Chat = () => {
         <div className="current-chat">
           {chosenChat ? (
             <div className="chat">
-              <ChatToolbar />
+              <Toolbar />
               <MessageList />
-              <ChatInput />
+              <Input />
             </div>
           ) : (
             <div className="no-chat-selected">
