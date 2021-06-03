@@ -5,17 +5,14 @@ import { Icon } from 'semantic-ui-react';
 import { SearchUsers } from 'components/SearchUsers';
 
 export const ChatToolbar = () => {
-  const { chosenChat, chatConfig } = useChat();
+  const { chosenChat, chatInfo } = useChat();
   const [searching, setSearching] = useState(false);
 
   return (
     <>
       <div className="chat-toolbar">
         <div className="chat-header-text">
-          {joinUsernames(chosenChat.people, chatConfig.userName).slice(
-            0,
-            100,
-          )}
+          {joinUsernames(chosenChat.people, chatInfo.userName).slice(0, 100)}
         </div>
 
         <div className="add-user-icon">

@@ -23,23 +23,23 @@ export const SearchUsers = ({ visible, closeFn }) => {
   }, [visible]);
 
   const {
-    myChats,
-    setMyChats,
-    chatConfig,
+    personalChats,
+    setPersonalChats,
+    chatInfo,
     chosenChat,
     setChosenChat,
   } = useChat();
 
   const selectUser = username => {
-    addPerson(chatConfig, chosenChat.id, username, () => {
-      const filteredChats = myChats.filter(c => c.id !== chosenChat.id);
+    addPerson(chatInfo, chosenChat.id, username, () => {
+      const filteredChats = personalChats.filter(c => c.id !== chosenChat.id);
       const updatedChat = {
         ...chosenChat,
         people: [...chosenChat.people, { person: { username } }],
       };
 
       setChosenChat(updatedChat);
-      setMyChats([...filteredChats, updatedChat]);
+      setPersonalChats([...filteredChats, updatedChat]);
       closeFn();
     });
   };
@@ -47,7 +47,7 @@ export const SearchUsers = ({ visible, closeFn }) => {
   useEffect(() => {
     if (debouncedSearchTerm) {
       setLoading(true);
-      getOtherPeople(chatConfig, chosenChat.id, (chatId, data) => {
+      getOtherPeople(chatInfo, chosenChat.id, (chatId, data) => {
         const userNames = Object.keys(data)
           .map(key => data[key].username)
           .filter(u =>
@@ -59,7 +59,7 @@ export const SearchUsers = ({ visible, closeFn }) => {
     } else {
       setSearchResults(null);
     }
-  }, [debouncedSearchTerm, chatConfig, chosenChat]);
+  }, [debouncedSearchTerm, chatInfo, chosenChat]);
 
   return (
     <div

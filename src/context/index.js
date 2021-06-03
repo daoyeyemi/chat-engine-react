@@ -5,25 +5,25 @@ import { newChat, leaveChat, deleteChat, getMessages } from 'react-chat-engine';
 export const ChatContext = createContext();
 
 export const ChatProvider = ({ children, authUser }) => {
-  const [myChats, setMyChats] = useState();
-  const [chatConfig, setChatConfig] = useState();
+  const [personalChats, setPersonalChats] = useState();
+  const [chatInfo, setChatInfo] = useState();
   const [chosenChat, setChosenChat] = useState();
 
   const createChatFunc = () => {
-    newChat(chatConfig, { title: '' });
+    newChat(chatInfo, { title: '' });
   };
   const deleteChatFunc = chat => {
-    const isAdmin = chat.admin === chatConfig.userName;
+    const isAdmin = chat.admin === chatInfo.userName;
 
     if (isAdmin && window.confirm('Do you want to remove this chat?')
     ) {
-      deleteChat(chatConfig, chat.id);
+      deleteChat(chatInfo, chat.id);
     } else if (window.confirm('Do you want to exit this chat?')) {
-      leaveChat(chatConfig, chat.id, chatConfig.userName);
+      leaveChat(chatInfo, chat.id, chatInfo.userName);
     }
   };
   const selectChatFunc = chat => {
-    getMessages(chatConfig, chat.id, messages => {
+    getMessages(chatInfo, chat.id, messages => {
       setChosenChat({
         ...chat,
         messages,
@@ -31,7 +31,7 @@ export const ChatProvider = ({ children, authUser }) => {
     });
   };
 
-  // Set the chat config once the
+  // Set the chat Info once the
   // authUser has initialized.
   useEffect(() => {
     if (authUser) {
@@ -39,7 +39,7 @@ export const ChatProvider = ({ children, authUser }) => {
         .collection('chatUsers')
         .doc(authUser.uid)
         .onSnapshot(snap => {
-          setChatConfig({
+          setChatInfo({
             userSecret: authUser.uid,
             avatar: snap.data().avatar,
             userName: snap.data().userName,
@@ -47,16 +47,16 @@ export const ChatProvider = ({ children, authUser }) => {
           });
         });
     }
-  }, [authUser, setChatConfig]);
+  }, [authUser, setChatInfo]);
 
   return (
     <ChatContext.Provider
       value={{
-        myChats,
-        setMyChats,
-        chatConfig,
+        personalChats,
+        setPersonalChats,
+        chatInfo,
         chosenChat,
-        setChatConfig,
+        setChatInfo,
         setChosenChat,
         selectChatFunc,
         deleteChatFunc,
@@ -70,11 +70,11 @@ export const ChatProvider = ({ children, authUser }) => {
 
 export const useChat = () => {
   const {
-    myChats,
-    setMyChats,
-    chatConfig,
+    personalChats,
+    setPersonalChats,
+    chatInfo,
     chosenChat,
-    setChatConfig,
+    setChatInfo,
     setChosenChat,
     selectChatFunc,
     deleteChatFunc,
@@ -82,11 +82,11 @@ export const useChat = () => {
   } = useContext(ChatContext);
 
   return {
-    myChats,
-    setMyChats,
-    chatConfig,
+    personalChats,
+    setPersonalChats,
+    chatInfo,
     chosenChat,
-    setChatConfig,
+    setChatInfo,
     setChosenChat,
     selectChatFunc,
     deleteChatFunc,

@@ -6,8 +6,8 @@ import { ImageUpload } from 'components/ImageUpload';
 import { Icon, IconGroup, Image, Loader } from 'semantic-ui-react';
 
 export const RailHeader = () => {
-  const { chatConfig } = useChat();
-  const configResolved = useResolved(chatConfig);
+  const { chatInfo } = useChat();
+  const configResolved = useResolved(chatInfo);
   const inputRef = useRef(null);
   const [image, setImage] = useState();
 
@@ -39,13 +39,13 @@ export const RailHeader = () => {
           onSubmit={croppedImage => {
             const storageRef = fb.storage.ref();
             const uploadRef = storageRef.child(
-              `${chatConfig.userSecret}_avatar.jpg`,
+              `${chatInfo.userSecret}_avatar.jpg`,
             );
             uploadRef.put(croppedImage).then(() => {
               uploadRef.getDownloadURL().then(url => {
                 fb.firestore
                   .collection('chatUsers')
-                  .doc(chatConfig.userSecret)
+                  .doc(chatInfo.userSecret)
                   .update({ avatar: url })
                   .then(() => {
                     setImage(null);
@@ -63,7 +63,7 @@ export const RailHeader = () => {
           className="sign-out"
           name="sign out"
         />
-        {configResolved && !!chatConfig ? (
+        {configResolved && !!chatInfo ? (
           <div className="current-user-info">
             <IconGroup
               onClick={() => {
@@ -76,18 +76,18 @@ export const RailHeader = () => {
               className="user-avatar"
               size="large"
             >
-              {chatConfig.avatar ? (
-                <Image src={chatConfig.avatar} avatar />
+              {chatInfo.avatar ? (
+                <Image src={chatInfo.avatar} avatar />
               ) : (
                 <div className="empty-avatar">
-                  {chatConfig.userName[0].toUpperCase()}
+                  {chatInfo.userName[0].toUpperCase()}
                 </div>
               )}
 
               <Icon corner name="camera" inverted circular />
             </IconGroup>
 
-            <div className="current-username">@{chatConfig.userName}</div>
+            <div className="current-username">@{chatInfo.userName}</div>
           </div>
         ) : (
           <div className="user-loading">

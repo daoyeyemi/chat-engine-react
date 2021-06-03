@@ -6,8 +6,8 @@ import { joinUsernames, notMe } from '../../helpers';
 
 export const ChatList = () => {
   const {
-    myChats,
-    chatConfig,
+    personalChats,
+    chatInfo,
     chosenChat,
     selectChatFunc,
     deleteChatFunc,
@@ -15,7 +15,7 @@ export const ChatList = () => {
 
   return (
     <div className="chat-list">
-      {myChats.map((c, index) => (
+      {personalChats.map((c, index) => (
         <div
           className={`chat-list-item ${
             chosenChat?.id === c.id ? 'selected-chat-item' : ''
@@ -35,10 +35,10 @@ export const ChatList = () => {
               </>
             ) : c.people.length === 2 ? (
               <>
-                <ChatAvatar username={notMe(chatConfig, c)} chat={c} />
+                <ChatAvatar username={notMe(chatInfo, c)} chat={c} />
 
                 <div className="chat-list-preview">
-                  <div className="preview-username">{notMe(chatConfig, c)}</div>
+                  <div className="preview-username">{notMe(chatInfo, c)}</div>
                   <div className="preview-message">
                     {c.last_message.attachments.length
                       ? `${c.last_message.sender.username} sent an attachment`
@@ -51,7 +51,7 @@ export const ChatList = () => {
                 <Icon circular inverted color="brown" name="users" />
                 <div className="chat-list-preview">
                   <div className="preview-username">
-                    {joinUsernames(c.people, chatConfig.userName).slice(0, 50)}
+                    {joinUsernames(c.people, chatInfo.userName).slice(0, 50)}
                     ...
                   </div>
                   <div className="preview-message">

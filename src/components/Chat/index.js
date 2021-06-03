@@ -8,46 +8,39 @@ import { MessageList } from 'components/MessageList';
 import { Icon } from 'semantic-ui-react';
 
 export const Chat = () => {
-  const {
-    myChats,
-    setMyChats,
-    chatConfig,
-    chosenChat,
-    selectChatFunc,
-    setChosenChat,
-  } = useChat();
+  const { personalChats, setPersonalChats, chatInfo, chosenChat, selectChatFunc, setChosenChat } = useChat();
 
   useEffect(() => {
-    console.log('My Chats: ', myChats);
-  }, [myChats]);
+    console.log('My Chats: ', personalChats);
+  }, [personalChats]);
 
   useEffect(() => {
-    console.log('chosen Chat: ', chosenChat);
+    console.log('Chosen Chat: ', chosenChat);
   }, [chosenChat]);
 
   return (
     <>
-      {!!chatConfig && (
+      {!!chatInfo && (
         <ChatEngine
           hideUI={true}
-          userName={chatConfig.userName}
-          projectID={chatConfig.projectID}
-          userSecret={chatConfig.userSecret}
+          userName={chatInfo.userName}
+          projectID={chatInfo.projectID}
+          userSecret={chatInfo.userSecret}
           onConnect={() => {
-            getChats(chatConfig, setMyChats);
+            getChats(chatInfo, setPersonalChats);
           }}
           onNewChat={chat => {
-            if (chat.admin.username === chatConfig.userName) {
+            if (chat.admin.username === chatInfo.userName) {
               selectChatFunc(chat);
             }
-            setMyChats([...myChats, chat].sort((a, b) => a.id - b.id));
+            setPersonalChats([...personalChats, chat].sort((a, b) => a.id - b.id));
           }}
           onDeleteChat={chat => {
             if (chosenChat?.id === chat.id) {
               setChosenChat(null);
             }
-            setMyChats(
-              myChats.filter(c => c.id !== chat.id).sort((a, b) => a.id - b.id),
+            setPersonalChats(
+              personalChats.filter(c => c.id !== chat.id).sort((a, b) => a.id - b.id),
             );
           }}
           onNewMessage={(chatId, message) => {
@@ -57,13 +50,13 @@ export const Chat = () => {
                 messages: [...chosenChat.messages, message],
               });
             }
-            const chatThatMessageBelongsTo = myChats.find(c => c.id === chatId);
-            const filteredChats = myChats.filter(c => c.id !== chatId);
+            const chatThatMessageBelongsTo = personalChats.find(c => c.id === chatId);
+            const filteredChats = personalChats.filter(c => c.id !== chatId);
             const updatedChat = {
               ...chatThatMessageBelongsTo,
               last_message: message,
             };
-            setMyChats(
+            setPersonalChats(
               [updatedChat, ...filteredChats].sort((a, b) => a.id - b.id),
             );
           }}

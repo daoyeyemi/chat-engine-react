@@ -5,15 +5,15 @@ import { RailHeader } from 'components/RailHeader';
 import { Loader } from 'semantic-ui-react';
 
 export const LeftRail = () => {
-  const { myChats, createChatFunc } = useChat();
-  const chatsResolved = useResolved(myChats);
+  const { personalChats, createChatFunc } = useChat();
+  const chatsResolved = useResolved(personalChats);
 
   return (
     <div className="left-rail">
       <RailHeader />
       {chatsResolved ? (
         <>
-          {!!myChats.length ? (
+          {!!personalChats.length ? (
             <div className="chat-list-container">
               <ChatList />
             </div>
