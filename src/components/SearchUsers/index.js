@@ -10,10 +10,7 @@ export const SearchUsers = ({ visible, closeFn }) => {
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
-
-  // null -> not searching for results
-  // [] -> No results
-  // [...] -> Results
+  
   const [searchResults, setSearchResults] = useState(null);
 
   useEffect(() => {

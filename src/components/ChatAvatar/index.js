@@ -8,11 +8,7 @@ export const ChatAvatar = ({ chat, username, className }) => {
   const [avatar, setAvatar] = useState('');
 
   useEffect(() => {
-    fb.firestore
-      .collection('chatUsers')
-      .where('userName', '==', username)
-      .get()
-      .then(snap => {
+    fb.firestore.collection('chatUsers').where('userName', '==', username).get().then(snap => {
         const data = snap.docs[0]?.data();
         if (data?.avatar) {
           setAvatar(data.avatar);

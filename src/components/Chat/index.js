@@ -10,14 +10,6 @@ import { Icon } from 'semantic-ui-react';
 export const Chat = () => {
   const { personalChats, setPersonalChats, chatInfo, chosenChat, selectChatFunc, setChosenChat } = useChat();
 
-  useEffect(() => {
-    console.log('My Chats: ', personalChats);
-  }, [personalChats]);
-
-  useEffect(() => {
-    console.log('Chosen Chat: ', chosenChat);
-  }, [chosenChat]);
-
   return (
     <>
       {!!chatInfo && (
@@ -39,26 +31,16 @@ export const Chat = () => {
             if (chosenChat?.id === chat.id) {
               setChosenChat(null);
             }
-            setPersonalChats(
-              personalChats.filter(c => c.id !== chat.id).sort((a, b) => a.id - b.id),
-            );
+            setPersonalChats(personalChats.filter(c => c.id !== chat.id).sort((a, b) => a.id - b.id));
           }}
           onNewMessage={(chatId, message) => {
             if (chosenChat && chatId === chosenChat.id) {
-              setChosenChat({
-                ...chosenChat,
-                messages: [...chosenChat.messages, message],
-              });
+              setChosenChat({ ...chosenChat, messages: [...chosenChat.messages, message] });
             }
-            const chatThatMessageBelongsTo = personalChats.find(c => c.id === chatId);
+            const chatThatMessageIsIn = personalChats.find(c => c.id === chatId);
             const filteredChats = personalChats.filter(c => c.id !== chatId);
-            const updatedChat = {
-              ...chatThatMessageBelongsTo,
-              last_message: message,
-            };
-            setPersonalChats(
-              [updatedChat, ...filteredChats].sort((a, b) => a.id - b.id),
-            );
+            const updatedChat = { ...chatThatMessageIsIn, last_message: message };
+            setPersonalChats([updatedChat, ...filteredChats].sort((a, b) => a.id - b.id));
           }}
         />
       )}

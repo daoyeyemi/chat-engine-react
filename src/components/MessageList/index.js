@@ -13,11 +13,7 @@ export const MessageList = () => {
         groupMessages(chosenChat.messages).map((m, index) => (
           <div key={index} className="chat-message">
             <div className="chat-message-header">
-              <ChatAvatar
-                className="message-avatar"
-                username={m[0].sender.username}
-                chat={chosenChat}
-              />
+              <ChatAvatar className="message-avatar" username={m[0].sender.username} chat={chosenChat} />
               <div className="message-author">{m[0].sender.username}</div>
             </div>
 
@@ -27,11 +23,7 @@ export const MessageList = () => {
                   <div className="message-text">{individualMessage.text}</div>
 
                   {!!individualMessage.attachments.length && (
-                    <img
-                      className="message-image"
-                      src={individualMessage.attachments[0].file}
-                      alt={individualMessage.id + '-attachment'}
-                    />
+                    <img alt={individualMessage.id + '-attachment'} src={individualMessage.attachments[0].file} className="message-image" />
                   )}
                 </div>
               ))}
