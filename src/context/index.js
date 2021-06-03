@@ -4,7 +4,7 @@ import { newChat, leaveChat, deleteChat, getMessages } from 'react-chat-engine';
 
 export const ChatContext = createContext();
 
-export const ChatProvider = ({ children, authUser }) => {
+export const ChatProvider = ({ children, authenticatedUser }) => {
   const [personalChats, setPersonalChats] = useState();
   const [chatInfo, setChatInfo] = useState();
   const [chosenChat, setChosenChat] = useState();
@@ -28,17 +28,17 @@ export const ChatProvider = ({ children, authUser }) => {
   };
 
   useEffect(() => {
-    if (authUser) {
-      fb.firestore.collection('chatUsers').doc(authUser.uid).onSnapshot(snap => {
+    if (authenticatedUser) {
+      fb.firestore.collection('chatUsers').doc(authenticatedUser.uid).onSnapshot(snap => {
           setChatInfo({
-            userSecret: authUser.uid,
+            userSecret: authenticatedUser.uid,
             avatar: snap.data().avatar,
             userName: snap.data().userName,
             projectID: '3cd31823-07eb-40ae-a37c-808ff891088d',
           });
       });
     }
-  }, [authUser, setChatInfo]);
+  }, [authenticatedUser, setChatInfo]);
 
   return (
     <ChatContext.Provider value={{ personalChats, setPersonalChats, chatInfo, chosenChat, setChatInfo, setChosenChat, selectChatFunc, deleteChatFunc, createChatFunc }}>

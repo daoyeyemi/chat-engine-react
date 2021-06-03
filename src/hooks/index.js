@@ -2,21 +2,21 @@ import { fb } from 'service';
 import { useEffect, useState } from 'react';
 
 export const useAuth = () => {
-  const [authUser, setAuthUser] = useState(); // undefined | firebase.User | null
+  const [authenticatedUser, setAuthenticatedUser] = useState(); // undefined | firebase.User | null
 
   useEffect(() => {
     const unsubscribe = fb.auth.onAuthStateChanged(user => {
       if (user) {
-        setAuthUser(user);
+        setAuthenticatedUser(user);
       } else {
-        setAuthUser(null);
+        setAuthenticatedUser(null);
       }
     });
     return unsubscribe;
   }, []);
 
   return {
-    authUser,
+    authenticatedUser,
   };
 };
 

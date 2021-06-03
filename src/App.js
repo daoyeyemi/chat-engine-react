@@ -10,20 +10,20 @@ import { Dimmer, Loader }  from "semantic-ui-react";
 
 export const App = () => {
   const history = useHistory();
-  const { authUser } = useAuth();
-  const authResolved = useResolved(authUser);
+  const { authenticatedUser } = useAuth();
+  const authResolved = useResolved(authenticatedUser);
 
   // If the user is logged in it will prevent the
   // user from seeing the login/signup screens
   // by always redirecting to chat on auth change.
   useEffect(() => {
     if (authResolved) {
-      history.push(!!authUser ? '/' : '/login');
+      history.push(!!authenticatedUser ? '/' : '/login');
     }
-  }, [authResolved, authUser, history]);
+  }, [authResolved, authenticatedUser, history]);
 
   return authResolved ? (
-    <ChatProvider authUser={authUser}>
+    <ChatProvider authenticatedUser={authenticatedUser}>
       <div className="app">
         <Switch>
           <Route path="/" exact component={Chat} />

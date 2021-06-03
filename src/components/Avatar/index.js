@@ -3,7 +3,7 @@ import { useChat } from '../../context';
 import { Image } from 'semantic-ui-react';
 import React, { useEffect, useState } from 'react';
 
-export const ChatAvatar = ({ chat, username, className }) => {
+export const Avatar = ({ chat, username, className }) => {
   const { chatInfo } = useChat();
   const [avatar, setAvatar] = useState('');
 

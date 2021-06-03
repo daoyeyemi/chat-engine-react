@@ -1,6 +1,6 @@
 import React from 'react';
 import { useChat } from '../../context';
-import { ChatAvatar } from 'components/ChatAvatar';
+import { Avatar } from 'components/Avatar';
 import { Icon } from 'semantic-ui-react';
 import { joinUsernames, notMe } from '../../helpers';
 
@@ -16,16 +16,8 @@ export const ChatList = () => {
   return (
     <div className="chat-list">
       {personalChats.map((c, index) => (
-        <div
-          className={`chat-list-item ${
-            chosenChat?.id === c.id ? 'selected-chat-item' : ''
-          }`}
-          key={index}
-        >
-          <div
-            onClick={() => selectChatFunc(c)}
-            className="chat-list-item-content"
-          >
+        <div className={`chat-list-item ${chosenChat?.id === c.id ? 'selected-chat-item' : ''}`} key={index}>
+          <div onClick={() => selectChatFunc(c)} className="chat-list-item-content">
             {c.people.length === 1 ? (
               <>
                 <Icon circular inverted color="violet" name="user cancel" />
@@ -35,7 +27,7 @@ export const ChatList = () => {
               </>
             ) : c.people.length === 2 ? (
               <>
-                <ChatAvatar username={notMe(chatInfo, c)} chat={c} />
+                <Avatar username={notMe(chatInfo, c)} chat={c} />
 
                 <div className="chat-list-preview">
                   <div className="preview-username">{notMe(chatInfo, c)}</div>
