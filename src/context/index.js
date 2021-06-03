@@ -7,24 +7,24 @@ export const ChatContext = createContext();
 export const ChatProvider = ({ children, authUser }) => {
   const [myChats, setMyChats] = useState();
   const [chatConfig, setChatConfig] = useState();
-  const [selectedChat, setSelectedChat] = useState();
+  const [chosenChat, setChosenChat] = useState();
 
-  const createChatClick = () => {
+  const createChatFunc = () => {
     newChat(chatConfig, { title: '' });
   };
-  const deleteChatClick = chat => {
+  const deleteChatFunc = chat => {
     const isAdmin = chat.admin === chatConfig.userName;
 
-    if (isAdmin && window.confirm('Are you sure you want to delete this chat?')
+    if (isAdmin && window.confirm('Do you want to remove this chat?')
     ) {
       deleteChat(chatConfig, chat.id);
-    } else if (window.confirm('Are you sure you want to leave this chat?')) {
+    } else if (window.confirm('Do you want to exit this chat?')) {
       leaveChat(chatConfig, chat.id, chatConfig.userName);
     }
   };
-  const selectChatClick = chat => {
+  const selectChatFunc = chat => {
     getMessages(chatConfig, chat.id, messages => {
-      setSelectedChat({
+      setChosenChat({
         ...chat,
         messages,
       });
@@ -55,12 +55,12 @@ export const ChatProvider = ({ children, authUser }) => {
         myChats,
         setMyChats,
         chatConfig,
-        selectedChat,
+        chosenChat,
         setChatConfig,
-        setSelectedChat,
-        selectChatClick,
-        deleteChatClick,
-        createChatClick,
+        setChosenChat,
+        selectChatFunc,
+        deleteChatFunc,
+        createChatFunc,
       }}
     >
       {children}
@@ -73,23 +73,23 @@ export const useChat = () => {
     myChats,
     setMyChats,
     chatConfig,
-    selectedChat,
+    chosenChat,
     setChatConfig,
-    setSelectedChat,
-    selectChatClick,
-    deleteChatClick,
-    createChatClick,
+    setChosenChat,
+    selectChatFunc,
+    deleteChatFunc,
+    createChatFunc,
   } = useContext(ChatContext);
 
   return {
     myChats,
     setMyChats,
     chatConfig,
-    selectedChat,
+    chosenChat,
     setChatConfig,
-    setSelectedChat,
-    selectChatClick,
-    deleteChatClick,
-    createChatClick,
+    setChosenChat,
+    selectChatFunc,
+    deleteChatFunc,
+    createChatFunc,
   };
 };

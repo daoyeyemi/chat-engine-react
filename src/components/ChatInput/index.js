@@ -5,7 +5,7 @@ import { ImageUpload } from 'components/ImageUpload';
 import { sendMessage } from 'react-chat-engine';
 
 export const ChatInput = () => {
-  const { chatConfig, selectedChat } = useChat();
+  const { chatConfig, chosenChat } = useChat();
   const [chatInputText, setChatInputText] = useState('');
   const [imageModalOpen, setImageModalOpen] = useState(false);
 
@@ -13,9 +13,9 @@ export const ChatInput = () => {
   const [image, setImage] = useState();
 
   const sendChatMessage = () => {
-    if (selectedChat && chatInputText) {
+    if (chosenChat && chatInputText) {
       setChatInputText('');
-      sendMessage(chatConfig, selectedChat.id, {
+      sendMessage(chatConfig, chosenChat.id, {
         text: chatInputText,
         files: [],
       });
@@ -78,7 +78,7 @@ export const ChatInput = () => {
           onSubmit={() => {
             sendMessage(
               chatConfig,
-              selectedChat.id,
+              chosenChat.id,
               {
                 text: chatInputText,
                 files: [image],

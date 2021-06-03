@@ -8,9 +8,9 @@ export const ChatList = () => {
   const {
     myChats,
     chatConfig,
-    selectedChat,
-    selectChatClick,
-    deleteChatClick,
+    chosenChat,
+    selectChatFunc,
+    deleteChatFunc,
   } = useChat();
 
   return (
@@ -18,12 +18,12 @@ export const ChatList = () => {
       {myChats.map((c, index) => (
         <div
           className={`chat-list-item ${
-            selectedChat?.id === c.id ? 'selected-chat-item' : ''
+            chosenChat?.id === c.id ? 'selected-chat-item' : ''
           }`}
           key={index}
         >
           <div
-            onClick={() => selectChatClick(c)}
+            onClick={() => selectChatFunc(c)}
             className="chat-list-item-content"
           >
             {c.people.length === 1 ? (
@@ -64,7 +64,7 @@ export const ChatList = () => {
             )}
           </div>
 
-          <div onClick={() => deleteChatClick(c)} className="chat-item-delete">
+          <div onClick={() => deleteChatFunc(c)} className="chat-item-delete">
             <Icon name="delete" />
           </div>
         </div>

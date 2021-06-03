@@ -4,19 +4,19 @@ import { groupMessages } from '../../helpers';
 import { useScrollToBottom } from '../../hooks';
 
 export const MessageList = () => {
-  const { selectedChat } = useChat();
-  useScrollToBottom(selectedChat, 'chat-messages');
+  const { chosenChat } = useChat();
+  useScrollToBottom(chosenChat, 'chat-messages');
 
   return (
     <div className="chat-messages">
-      {!!selectedChat.messages.length ? (
-        groupMessages(selectedChat.messages).map((m, index) => (
+      {!!chosenChat.messages.length ? (
+        groupMessages(chosenChat.messages).map((m, index) => (
           <div key={index} className="chat-message">
             <div className="chat-message-header">
               <ChatAvatar
                 className="message-avatar"
                 username={m[0].sender.username}
-                chat={selectedChat}
+                chat={chosenChat}
               />
               <div className="message-author">{m[0].sender.username}</div>
             </div>

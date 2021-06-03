@@ -5,7 +5,7 @@ import { RailHeader } from 'components/RailHeader';
 import { Loader } from 'semantic-ui-react';
 
 export const LeftRail = () => {
-  const { myChats, createChatClick } = useChat();
+  const { myChats, createChatFunc } = useChat();
   const chatsResolved = useResolved(myChats);
 
   return (
@@ -22,7 +22,7 @@ export const LeftRail = () => {
               <h3>No Chats Yet</h3>
             </div>
           )}
-          <button className="create-chat-button" onClick={createChatClick}>
+          <button className="create-chat-button" onClick={createChatFunc}>
             Create Chat
           </button>
         </>

@@ -12,9 +12,9 @@ export const Chat = () => {
     myChats,
     setMyChats,
     chatConfig,
-    selectedChat,
-    selectChatClick,
-    setSelectedChat,
+    chosenChat,
+    selectChatFunc,
+    setChosenChat,
   } = useChat();
 
   useEffect(() => {
@@ -22,8 +22,8 @@ export const Chat = () => {
   }, [myChats]);
 
   useEffect(() => {
-    console.log('Selected Chat: ', selectedChat);
-  }, [selectedChat]);
+    console.log('chosen Chat: ', chosenChat);
+  }, [chosenChat]);
 
   return (
     <>
@@ -38,23 +38,23 @@ export const Chat = () => {
           }}
           onNewChat={chat => {
             if (chat.admin.username === chatConfig.userName) {
-              selectChatClick(chat);
+              selectChatFunc(chat);
             }
             setMyChats([...myChats, chat].sort((a, b) => a.id - b.id));
           }}
           onDeleteChat={chat => {
-            if (selectedChat?.id === chat.id) {
-              setSelectedChat(null);
+            if (chosenChat?.id === chat.id) {
+              setChosenChat(null);
             }
             setMyChats(
               myChats.filter(c => c.id !== chat.id).sort((a, b) => a.id - b.id),
             );
           }}
           onNewMessage={(chatId, message) => {
-            if (selectedChat && chatId === selectedChat.id) {
-              setSelectedChat({
-                ...selectedChat,
-                messages: [...selectedChat.messages, message],
+            if (chosenChat && chatId === chosenChat.id) {
+              setChosenChat({
+                ...chosenChat,
+                messages: [...chosenChat.messages, message],
               });
             }
             const chatThatMessageBelongsTo = myChats.find(c => c.id === chatId);
@@ -73,7 +73,7 @@ export const Chat = () => {
       <div className="chat-container">
         <LeftRail />
         <div className="current-chat">
-          {selectedChat ? (
+          {chosenChat ? (
             <div className="chat">
               <ChatToolbar />
               <MessageList />
@@ -82,7 +82,7 @@ export const Chat = () => {
           ) : (
             <div className="no-chat-selected">
               <Icon size='big' name='angle double left' />
-              Select A Chat
+              Choose A Chat
             </div>
           )}
         </div>
